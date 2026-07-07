@@ -39,4 +39,13 @@ export default defineConfig({
     },
     extensions: [".js", ".ts", ".vue"],
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://ceshi13.dishait.cn",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

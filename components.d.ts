@@ -11,10 +11,17 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
+    NDialogProvider: typeof import('naive-ui')['NDialogProvider']
+    NFlex: typeof import('naive-ui')['NFlex']
+    NForm: typeof import('naive-ui')['NForm']
+    NFormItem: typeof import('naive-ui')['NFormItem']
+    NGrid: typeof import('naive-ui')['NGrid']
+    NGridItem: typeof import('naive-ui')['NGridItem']
+    NIcon: typeof import('naive-ui')['NIcon']
+    NInput: typeof import('naive-ui')['NInput']
+    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NResult: typeof import('naive-ui')['NResult']
-    NSpace: typeof import('naive-ui')['NSpace']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
