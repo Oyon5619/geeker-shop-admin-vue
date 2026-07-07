@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
       <n-flex class="h-full" justify="center" align="center" vertical>
         <p class="text-5xl text-white font-bold">Welcome!</p>
         <p class="text-xl text-white">
-          An <strong>{{ SYSTEM_NAME }}</strong> based on Vue 3.
+          <strong>{{ SYSTEM_NAME }}</strong> based on Vue 3.
         </p>
       </n-flex>
     </n-grid-item>

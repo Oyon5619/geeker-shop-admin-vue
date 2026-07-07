@@ -2,4 +2,4 @@
 export const ADMIN_TOKEN_KEY = "admin-token";
 
 /** 系统名 */
-export const SYSTEM_NAME = "E-Shop Admin System";
+export const SYSTEM_NAME = "Geeker-Shop Admin";
