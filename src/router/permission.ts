@@ -1,6 +1,7 @@
 import store from "@/store";
 import { getToken } from "@/utils/auth";
 import { showToast } from "@/utils/popup";
+import { beginFullLoading, endFullLoading } from "@/utils/progress";
 import { cloneDeep } from "lodash";
 import type { Router } from "vue-router";
 
@@ -9,6 +10,9 @@ export function initRouter(router: Router) {
 
   // 全局路由前置守卫
   resultRouter.beforeEach(async (to, from, next) => {
+    // 显示loading
+    beginFullLoading();
+
     const token = getToken();
 
     // 未登录则强制跳转回登录页
@@ -27,7 +31,16 @@ export function initRouter(router: Router) {
       await store.dispatch("getAdminInfo");
     }
 
+    // 设置页面标题
+    const pageTitle = (to.meta.title as string) ?? "";
+    document.title = pageTitle;
+
     next();
+  });
+
+  // 全局后置守卫
+  resultRouter.afterEach(() => {
+    endFullLoading();
   });
 
   return resultRouter;
