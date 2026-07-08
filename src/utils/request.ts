@@ -1,6 +1,6 @@
 import type { BaseResp } from "@/types/apiTypes";
 import axios, { AxiosError, type AxiosRequestConfig } from "axios";
-import { errorToast } from "./popup";
+import { showToast } from "./popup";
 import { getToken } from "./auth";
 
 const instance = axios.create({
@@ -14,7 +14,7 @@ const apiErrorHandler = (err: AxiosError<BaseResp>) => {
 
   // 统一处理接口报错
   const { msg, errorCode } = err.response?.data ?? {};
-  errorToast(`ErrorCode:${errorCode} ${msg}`);
+  showToast("error", `ErrorCode:${errorCode} ${msg}`);
 };
 
 instance.interceptors.request.use(
