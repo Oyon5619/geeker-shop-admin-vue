@@ -3,6 +3,7 @@ import type {
   GetAdminInfoApiResp,
   LoginApiReq,
   LoginApiResp,
+  ModifyAdminPwdReq,
 } from "@/types/apiTypes";
 import request from "@/utils/request";
 
@@ -26,4 +27,12 @@ export const getAdminInfoApi = async () =>
   await request<unknown, BaseResp<GetAdminInfoApiResp>>({
     url: "/admin/getinfo",
     method: "POST",
+  });
+
+// 修改管理员密码
+export const modifyAdminPwdApi = async (data: ModifyAdminPwdReq) =>
+  await request<ModifyAdminPwdReq, BaseResp<boolean>>({
+    url: "/admin/updatepassword",
+    method: "POST",
+    data,
   });

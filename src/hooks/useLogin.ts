@@ -8,8 +8,10 @@ export const useLogin = () => {
 
   const { runAsync: login, loading: logining } = useRequest(
     async (loginData: LoginApiReq) => {
-      await store.dispatch("login", loginData);
-      router.push({ path: "/" });
+      const isSuccess = await store.dispatch("login", loginData);
+      if (isSuccess) {
+        router.push({ path: "/" });
+      }
     },
     { manual: true },
   );
