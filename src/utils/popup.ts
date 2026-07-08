@@ -2,7 +2,6 @@
 import {
   createDiscreteApi,
   type DialogOptions,
-  type MessageOptions,
   type MessageType,
 } from "naive-ui";
 

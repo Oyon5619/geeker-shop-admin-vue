@@ -38,6 +38,7 @@ interface AdminMenu {
   child?: AdminMenu[];
 }
 
+/** 获取管理员个人信息响应体 */
 export interface GetAdminInfoApiResp {
   id: number;
   username: string;
@@ -46,4 +47,11 @@ export interface GetAdminInfoApiResp {
   role: AdminRole;
   menus: AdminMenu[];
   ruleNames: string[];
+}
+
+/** 修改管理员密码请求体 */
+export interface ModifyAdminPwdReq {
+  oldpassword: string;
+  password: string;
+  repassword: string;
 }
