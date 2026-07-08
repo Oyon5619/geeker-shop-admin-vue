@@ -1,6 +1,6 @@
 import store from "@/store";
 import { getToken } from "@/utils/auth";
-import { errorToast, toast } from "@/utils/popup";
+import { showToast } from "@/utils/popup";
 import { cloneDeep } from "lodash";
 import type { Router } from "vue-router";
 
@@ -13,13 +13,13 @@ export function initRouter(router: Router) {
 
     // 未登录则强制跳转回登录页
     if (!token && to.path !== "/login") {
-      errorToast("凭证无效或已过期,请登录");
+      showToast("error", "凭证无效或已过期,请登录");
       return next({ path: "/login" });
     }
 
     // 防止重复登录
     if (token && to.path === "/login") {
-      toast("请勿重复登录", { type: "warning" });
+      showToast("warning", "请勿重复登录");
       return next({ path: from.path ?? "/" });
     }
 

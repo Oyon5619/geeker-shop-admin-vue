@@ -2,7 +2,7 @@ import { getAdminInfoApi, loginApi, logoutApi } from "@/api/adminApi";
 import type { LoginApiReq } from "@/types/apiTypes";
 import type { StoreState } from "@/types/storeTypes";
 import { removeToken, setToken } from "@/utils/auth";
-import { okToast } from "@/utils/popup";
+import { showToast } from "@/utils/popup";
 import { createStore } from "vuex";
 
 const store = createStore<StoreState>({
@@ -24,7 +24,7 @@ const store = createStore<StoreState>({
 
         // 登录成功后存储token到cookie里
         setToken(tokenValue);
-        okToast("登录成功");
+        showToast("success", "登录成功");
       } catch (err) {
         console.error(err);
       }
@@ -33,7 +33,7 @@ const store = createStore<StoreState>({
       // 退出登录后要清除token和管理员信息
       try {
         await logoutApi();
-        okToast("登出成功");
+        showToast("success", "登出成功");
       } catch (err) {
         console.error(err);
       } finally {
