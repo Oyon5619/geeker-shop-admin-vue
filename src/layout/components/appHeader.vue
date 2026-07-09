@@ -1,14 +1,7 @@
 <script lang="ts" setup>
-import {
-  Cube,
-  Grid,
-  Reload,
-  SettingsOutline,
-  Expand,
-  Contract,
-} from "@vicons/ionicons5";
-import type { DropdownOption, FormInst, FormRules } from "naive-ui";
-import { h, reactive, ref } from "vue";
+import { Cube, Grid, Reload, Expand, Contract } from "@vicons/ionicons5";
+import type { DropdownOption } from "naive-ui";
+import { h, ref } from "vue";
 import store from "@/store";
 import { useDialog } from "@/utils/popup";
 import { useLogin } from "@/hooks/useLogin";
@@ -20,47 +13,12 @@ import { debounce } from "lodash";
 const adminName = store.state.adminInfo?.username;
 
 const isShowProfile = ref(false);
-
 const formDrawerRef = ref<{ onOpen?: () => void; onClose?: () => void }>({});
-const formRef = ref<FormInst>();
-const formValues = reactive({
-  oldpassword: "",
-  password: "",
-  repassword: "",
-});
-const formRules: FormRules = {
-  oldpassword: {
-    required: true,
-    message: "旧密码不能为空!",
-    trigger: ["blur", "input"],
-  },
-  password: {
-    required: true,
-    message: "新密码不能为空!",
-    trigger: ["blur", "input"],
-  },
-  repassword: [
-    {
-      required: true,
-      message: "请再确认密码!",
-      trigger: ["blur", "input"],
-    },
-    {
-      validator: (_, value) => {
-        if (!value && formValues.password) {
-          return true;
-        }
-        return value === formValues.password;
-      },
-      message: "确认密码与新密码必须保持一致!",
-      trigger: ["blur", "input"],
-    },
-  ],
-};
 
 const [isFullScreen, { toggleFullscreen }] = useFullscreen();
 const { logout, logouting } = useLogin();
-const { modifyAdminPwd, loading } = useModifyAdminPwd();
+const { formRef, formRules, formValues, loading, modifyAdminPwd } =
+  useModifyAdminPwd();
 
 const options: DropdownOption[] = [
   {
@@ -175,16 +133,6 @@ const onSubmitDebounce = debounce(onSubmit, 300);
       </n-tooltip>
     </n-flex>
     <n-flex class="ml-auto" align="center">
-      <n-tooltip placement="bottom" trigger="hover">
-        <template #trigger>
-          <n-icon
-            class="cursor-pointer"
-            :component="SettingsOutline"
-            size="25"
-          />
-        </template>
-        <span>设置</span>
-      </n-tooltip>
       <n-tooltip placement="bottom" trigger="hover">
         <template #trigger>
           <n-icon class="cursor-pointer" size="25" @click="toggleFullscreen">

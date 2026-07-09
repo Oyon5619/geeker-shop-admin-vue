@@ -3,3 +3,6 @@ export const ADMIN_TOKEN_KEY = "admin-token";
 
 /** 系统名 */
 export const SYSTEM_NAME = "Geeker-Shop Admin";
+
+/** 弹窗类组件默认显示时间 */
+export const POPUP_DURATION = 3500;

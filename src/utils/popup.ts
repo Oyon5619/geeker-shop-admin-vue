@@ -1,4 +1,5 @@
 // 基于naive-ui的消息提示再封装
+import { POPUP_DURATION } from "@/constants/common";
 import {
   createDiscreteApi,
   type DialogOptions,
@@ -13,11 +14,10 @@ interface UseDialogParams extends Omit<
   onCancel?: () => void;
 }
 
-const DEFAULT_DURATION = 3000;
 const { message, dialog } = createDiscreteApi(["message", "dialog"]);
 
 export const showToast = (type: MessageType, content: string) => {
-  message.create(content, { type, duration: DEFAULT_DURATION });
+  message.create(content, { type, duration: POPUP_DURATION });
 };
 
 export const useDialog = (params: UseDialogParams) => {

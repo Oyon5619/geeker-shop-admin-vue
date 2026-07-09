@@ -6,6 +6,7 @@ import { useRouter } from "vue-router";
 export const useLogin = () => {
   const router = useRouter();
 
+  // 登录
   const { runAsync: login, loading: logining } = useRequest(
     async (loginData: LoginApiReq) => {
       const isSuccess = await store.dispatch("login", loginData);
@@ -16,6 +17,7 @@ export const useLogin = () => {
     { manual: true },
   );
 
+  // 退出登录
   const { runAsync: logout, loading: logouting } = useRequest(
     async () => {
       await store.dispatch("logout");
