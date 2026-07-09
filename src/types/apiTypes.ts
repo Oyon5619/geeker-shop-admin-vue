@@ -21,7 +21,7 @@ interface AdminRole {
   name: string;
 }
 
-interface AdminMenu {
+export interface AdminMenu {
   id: number;
   rule_id: number;
   status: number;

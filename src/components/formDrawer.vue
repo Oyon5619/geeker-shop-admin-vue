@@ -4,11 +4,13 @@ import { ref } from "vue";
 const {
   title,
   okText = "提交",
+  cancelText = "取消",
   width = "25%",
   loading,
 } = defineProps<{
   title: string;
   okText?: string;
+  cancelText?: string;
   width?: string | number;
   loading?: boolean;
 }>();
@@ -47,7 +49,7 @@ defineExpose({
           <n-button type="primary" :loading="loading" @click="onSubmit">{{
             okText
           }}</n-button>
-          <n-button :loading="loading" @click="onClose">取消</n-button>
+          <n-button @click="onClose">{{ cancelText }}</n-button>
         </n-flex>
       </n-flex>
     </n-drawer-content>

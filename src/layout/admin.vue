@@ -5,14 +5,12 @@ import TagList from "./components/tagList.vue";
 </script>
 
 <template>
-  <n-layout>
-    <n-layout-header>
+  <n-layout class="h-full">
+    <n-layout-header class="fixed z-50">
       <AppHeader />
     </n-layout-header>
-    <n-layout has-sider>
-      <n-layout-sider>
-        <AppMenu />
-      </n-layout-sider>
+    <n-layout class="pt-12 h-full" has-sider>
+      <AppMenu />
       <n-layout-content>
         <TagList />
         <RouterView />
