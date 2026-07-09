@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Cube, Grid, Reload, Expand, Contract } from "@vicons/ionicons5";
+import { Cube, MenuSharp, Reload, Expand, Contract } from "@vicons/ionicons5";
 import type { DropdownOption } from "naive-ui";
 import { h, ref } from "vue";
 import store from "@/store";
@@ -116,7 +116,12 @@ const onSubmitDebounce = debounce(onSubmit, 300);
     <n-flex align="center">
       <n-tooltip placement="bottom" trigger="hover">
         <template #trigger>
-          <n-icon class="cursor-pointer" :component="Grid" size="25" />
+          <n-icon
+            class="cursor-pointer"
+            :component="MenuSharp"
+            size="25"
+            @click="$store.commit('TOGGLE_COLLAPSED')"
+          />
         </template>
         <span>菜单</span>
       </n-tooltip>
@@ -144,7 +149,7 @@ const onSubmitDebounce = debounce(onSubmit, 300);
         <span v-else>全屏</span>
       </n-tooltip>
       <n-dropdown trigger="hover" :options="options" @select="onSelect">
-        <n-avatar :size="40" :src="$store.state.adminInfo.avatar" round />
+        <n-avatar :size="40" :src="$store.state.adminInfo?.avatar" round />
       </n-dropdown>
     </n-flex>
   </n-flex>
@@ -198,6 +203,6 @@ const onSubmitDebounce = debounce(onSubmit, 300);
 @reference "@/styles/index.css";
 
 .app-header {
-  @apply bg-green-700 h-12 text-white px-8;
+  @apply bg-green-700 h-14 text-white px-8;
 }
 </style>
