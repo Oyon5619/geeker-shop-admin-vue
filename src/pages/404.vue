@@ -4,6 +4,22 @@ export default {
     backToHome() {
       this.$router.push("/");
     },
+    removeFromTab() {
+      const { fullPath } = this.$route;
+      const { state, dispatch } = this.$store;
+
+      const targetTab = state.tabList.find(
+        (item) => item.routePath === fullPath,
+      );
+      if (!targetTab) {
+        return;
+      }
+
+      dispatch("removeTab", targetTab.key);
+    },
+  },
+  created() {
+    this.removeFromTab();
   },
 };
 </script>

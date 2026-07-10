@@ -3,7 +3,7 @@ import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import type { FormInst, FormRules } from "naive-ui";
 import { LockClosedOutline, FlashOutline } from "@vicons/ionicons5";
 import { useLogin } from "@/hooks/useLogin";
-import { SYSTEM_NAME } from "@/constants/common";
+import { SYSTEM_APP_NAME } from "@/constants/common";
 
 const { login, logining } = useLogin();
 
@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
       <n-flex class="h-full" justify="center" align="center" vertical>
         <p class="text-5xl text-white font-bold">Welcome!</p>
         <p class="text-xl text-white">
-          <strong>{{ SYSTEM_NAME }}</strong> based on Vue 3.
+          <strong>{{ SYSTEM_APP_NAME }}</strong> based on Vue 3.
         </p>
       </n-flex>
     </n-grid-item>
@@ -71,7 +71,7 @@ onBeforeUnmount(() => {
           :disabled="logining"
         >
           <n-form-item class="text-xl font-bold">
-            {{ SYSTEM_NAME }}
+            {{ SYSTEM_APP_NAME }}
           </n-form-item>
           <n-form-item label="用户名" path="username">
             <n-input

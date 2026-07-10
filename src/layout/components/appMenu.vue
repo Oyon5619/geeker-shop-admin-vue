@@ -1,8 +1,13 @@
 <script lang="ts" setup>
-import { useMenuManager } from "@/hooks/useMenuManager";
-import { onMounted } from "vue";
+import store from "@/store";
+import type { MenuItem } from "@/types/menuItemn";
+import { useRoute } from "vue-router";
 
-const { menuOptions, defaultActive, onMenuSelect } = useMenuManager();
+const route = useRoute();
+
+const onMenuSelect = (key: number, { label: title, routePath }: MenuItem) => {
+  store.dispatch("addTab", { key, title, routePath });
+};
 </script>
 
 <template>
@@ -12,8 +17,8 @@ const { menuOptions, defaultActive, onMenuSelect } = useMenuManager();
     :collapsed="$store.state.isCollapsed"
   >
     <n-menu
-      :options="menuOptions"
-      :default-value="defaultActive"
+      :default-value="$store.getters.defaultActive?.(route.path)"
+      :options="$store.getters.menuOptions"
       :watch-props="['defaultValue', 'defaultExpandedKeys']"
       @update-value="onMenuSelect"
       accordion

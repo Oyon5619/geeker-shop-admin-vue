@@ -2,6 +2,7 @@ import type { LoginApiReq } from "@/types/apiTypes";
 import { useRequest } from "vue-hooks-plus";
 import store from "@/store";
 import { useRouter } from "vue-router";
+import { showToast } from "@/utils/popup";
 
 export const useLogin = () => {
   const router = useRouter();
@@ -11,6 +12,7 @@ export const useLogin = () => {
     async (loginData: LoginApiReq) => {
       const isSuccess = await store.dispatch("login", loginData);
       if (isSuccess) {
+        showToast("success", "登录成功");
         router.push({ path: "/" });
       }
     },
