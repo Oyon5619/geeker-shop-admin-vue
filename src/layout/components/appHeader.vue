@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Cube, MenuSharp, Expand, Contract } from "@vicons/ionicons5";
+import { Cube, MenuSharp, Expand, Contract, Reload } from "@vicons/ionicons5";
 import type { DropdownOption } from "naive-ui";
 import { h, ref } from "vue";
 import store from "@/store";
@@ -9,6 +9,7 @@ import { useFullscreen } from "vue-hooks-plus";
 import FormDrawer from "@/components/formDrawer.vue";
 import { useModifyAdminPwd } from "@/hooks/useModifyAdminPwd";
 import { debounce } from "lodash";
+import { SYSTEM_APP_NAME } from "@/constants/common";
 
 const adminName = store.state.adminInfo?.username;
 
@@ -72,6 +73,10 @@ const onToggleProfileDrawer = () => {
   isShowProfile.value = true;
 };
 
+const onReload = () => {
+  location.reload();
+};
+
 const onSelect = (key: string) => {
   switch (key) {
     case "profile":
@@ -107,7 +112,7 @@ const onSubmitDebounce = debounce(onSubmit, 300);
   <n-flex align="center" class="app-header">
     <n-flex align="center" justify="center" class="w-60 cursor-pointer">
       <n-icon :component="Cube" size="35" />
-      <p class="text-xl font-thin">Geeker-Shop</p>
+      <p class="text-lg font-thin">{{ SYSTEM_APP_NAME }}</p>
     </n-flex>
     <n-flex align="center">
       <n-tooltip placement="bottom" trigger="hover">
@@ -120,6 +125,17 @@ const onSubmitDebounce = debounce(onSubmit, 300);
           />
         </template>
         <span>菜单</span>
+      </n-tooltip>
+      <n-tooltip placement="bottom" trigger="hover">
+        <template #trigger>
+          <n-icon
+            class="cursor-pointer"
+            :component="Reload"
+            size="25"
+            @click="onReload"
+          />
+        </template>
+        <span>刷新</span>
       </n-tooltip>
     </n-flex>
     <n-flex class="ml-auto" align="center">
@@ -188,6 +204,6 @@ const onSubmitDebounce = debounce(onSubmit, 300);
 @reference "@/styles/index.css";
 
 .app-header {
-  @apply bg-green-700 h-14 text-white px-8;
+  @apply bg-green-700 h-14 text-white px-4;
 }
 </style>

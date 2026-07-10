@@ -13,7 +13,11 @@ import TabList from "./components/tabList.vue";
       <AppMenu />
       <n-layout-content class="h-full p-4">
         <TabList />
-        <RouterView />
+        <RouterView v-slot="{ Component }">
+          <KeepAlive max="10">
+            <component :is="Component"></component>
+          </KeepAlive>
+        </RouterView>
       </n-layout-content>
     </n-layout>
   </n-layout>
