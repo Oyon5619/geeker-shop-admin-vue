@@ -152,6 +152,17 @@ const store = createStore<StoreState>({
 
       state.tabList.splice(index, 1);
     },
+
+    removeTabByRoutePath({ dispatch, state }, routePath: string) {
+      const targetTab = state.tabList.find(
+        (item) => item.routePath === routePath,
+      );
+      if (!targetTab) {
+        return;
+      }
+
+      dispatch("removeTab", targetTab.key);
+    },
   },
   plugins: [persist.plugin],
 });

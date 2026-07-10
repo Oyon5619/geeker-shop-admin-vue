@@ -14,6 +14,7 @@ const onMenuSelect = (key: number, { label: title, routePath }: MenuItem) => {
   <n-layout-sider
     class="shadow-lg"
     collapse-mode="width"
+    width="285"
     :collapsed="$store.state.isCollapsed"
   >
     <n-menu

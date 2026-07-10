@@ -6,16 +6,9 @@ export default {
     },
     removeFromTab() {
       const { fullPath } = this.$route;
-      const { state, dispatch } = this.$store;
+      const { dispatch } = this.$store;
 
-      const targetTab = state.tabList.find(
-        (item) => item.routePath === fullPath,
-      );
-      if (!targetTab) {
-        return;
-      }
-
-      dispatch("removeTab", targetTab.key);
+      dispatch("removeTabByRoutePath", fullPath);
     },
   },
   created() {

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { HOME_PAGE_MENU_ID } from "@/constants/common";
 import store from "@/store";
 import { watch } from "vue";
 import { useRouter } from "vue-router";
@@ -36,6 +37,7 @@ watch(
       :key="item.key"
       :name="item.key"
       :tab="item.title"
+      :closable="item.key !== HOME_PAGE_MENU_ID"
     />
   </n-tabs>
 </template>
