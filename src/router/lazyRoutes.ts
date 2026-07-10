@@ -18,7 +18,7 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     path: "/category/list",
     name: "categories",
     meta: { title: "分类管理" },
-    component: () => import("@/pages/goods/goodList.vue"),
+    component: () => import("@/pages/goods/categories.vue"),
   },
   {
     path: "/skus/list",
@@ -31,5 +31,17 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     name: "coupons",
     meta: { title: "优惠券管理" },
     component: () => import("@/pages/goods/coupons.vue"),
+  },
+  {
+    path: "/user/list",
+    name: "userList",
+    meta: { title: "用户管理" },
+    component: () => import("@/pages/user/userList.vue"),
+  },
+  {
+    path: "/level/list",
+    name: "levelList",
+    meta: { title: "会员等级管理" },
+    component: () => import("@/pages/user/levelList.vue"),
   },
 ];

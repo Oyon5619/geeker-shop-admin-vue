@@ -1,4 +1,5 @@
 import type { AdminMenu, GetAdminInfoApiResp } from "./apiTypes";
+import type { TabItem } from "./tabItem";
 
 export interface StoreState {
   /** 当前管理员信息 */
@@ -7,5 +8,10 @@ export interface StoreState {
   isCollapsed?: boolean;
   /** 侧边菜单数据 */
   menus?: AdminMenu[];
-  ruleNames: [];
+  /**  */
+  ruleNames: string[];
+  /** 标签导航列表 */
+  tabList: TabItem[];
+  /** 当前点击的标签对应的key */
+  activeTabKey?: number;
 }

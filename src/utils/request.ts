@@ -39,6 +39,9 @@ instance.interceptors.response.use(
 
 const request = <Req = unknown, Resp = unknown>(
   config: AxiosRequestConfig<Req>,
-) => instance<Req, Resp>(config).catch((err) => Promise.reject(err));
+) =>
+  instance<Req, Resp>(config)
+    .then((res) => res)
+    .catch((err) => Promise.reject(err));
 
 export default request;

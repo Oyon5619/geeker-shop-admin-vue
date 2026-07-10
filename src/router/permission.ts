@@ -5,7 +5,10 @@ import { cloneDeep } from "lodash";
 import type { Router } from "vue-router";
 import { LAZY_ROUTES } from "./lazyRoutes";
 import { LAYOUT_ROUTE_NAME } from "@/constants/common";
+import { findAdminMenu } from "@/utils/menuUtil";
+import store from "@/store";
 
+// ...待优化
 const registerLayoutRoute = (router: Router, toPath: string) => {
   const target = LAZY_ROUTES.find(({ path }) => path === toPath);
   if (!target || router.hasRoute(target.name ?? "")) {
@@ -49,8 +52,11 @@ export const initRouter = (router: Router) => {
   });
 
   // 全局后置守卫
-  resultRouter.afterEach(() => {
+  resultRouter.afterEach(async (to) => {
     endFullLoading();
+
+    // 当用户通过url输入具体的路由地址后，要改变当前点击的导航标签
+    await store.dispatch("addTabByRoutePath", to.fullPath);
   });
 
   return resultRouter;

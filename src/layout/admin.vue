@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import AppHeader from "./components/appHeader.vue";
 import AppMenu from "./components/appMenu.vue";
-import TagList from "./components/tagList.vue";
+import TabList from "./components/tabList.vue";
 </script>
 
 <template>
@@ -11,8 +11,8 @@ import TagList from "./components/tagList.vue";
     </n-layout-header>
     <n-layout class="pt-14 h-full" has-sider>
       <AppMenu />
-      <n-layout-content>
-        <TagList />
+      <n-layout-content class="h-full p-4">
+        <TabList />
         <RouterView />
       </n-layout-content>
     </n-layout>

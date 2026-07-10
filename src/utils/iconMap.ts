@@ -12,7 +12,6 @@ import {
   Person,
   TicketOutline,
   FileTrayFullOutline,
-  LibraryOutline,
   LinkOutline,
   ManSharp,
   StatsChart,
@@ -25,6 +24,7 @@ import {
   CloudOutline,
   NotificationsOutline,
   ImageSharp,
+  ManOutline,
 } from "@vicons/ionicons5";
 import type { Component } from "vue";
 
@@ -43,7 +43,7 @@ export const ICON_MAP: Record<string, Component> = {
   "message-box": FileTrayFullOutline,
   reading: BookOutline,
   comment: ChatboxEllipsesOutline,
-  management: LibraryOutline,
+  management: ManOutline,
   coordinate: ManSharp,
   connection: LinkOutline,
   histogram: StatsChart,

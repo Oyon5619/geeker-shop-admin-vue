@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Cube, MenuSharp, Reload, Expand, Contract } from "@vicons/ionicons5";
+import { Cube, MenuSharp, Expand, Contract } from "@vicons/ionicons5";
 import type { DropdownOption } from "naive-ui";
 import { h, ref } from "vue";
 import store from "@/store";
@@ -54,10 +54,6 @@ const onLogout = () => {
     loading: logouting,
     onOk: logout,
   });
-};
-
-const onReload = () => {
-  location.reload();
 };
 
 // 打开修改密码抽屉
@@ -124,17 +120,6 @@ const onSubmitDebounce = debounce(onSubmit, 300);
           />
         </template>
         <span>菜单</span>
-      </n-tooltip>
-      <n-tooltip placement="bottom" trigger="hover">
-        <template #trigger>
-          <n-icon
-            class="cursor-pointer"
-            :component="Reload"
-            size="25"
-            @click="onReload"
-          />
-        </template>
-        <span>刷新</span>
       </n-tooltip>
     </n-flex>
     <n-flex class="ml-auto" align="center">
