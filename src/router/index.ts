@@ -6,37 +6,22 @@ import {
 import { initRouter } from "./permission";
 
 import NotFound from "@/pages/404.vue";
-import Home from "@/pages/home.vue";
 import Admin from "@/layout/admin.vue";
+import Login from "@/pages/login.vue";
+import { LAYOUT_ROUTE_NAME } from "@/constants/common";
 
-const ExampleComp = () => import("@/pages/example.vue");
-const loginComp = () => import("@/pages/login.vue");
-
-const ROUTES: RouteRecordRaw[] = [
+const DEFAULT_ROUTES: RouteRecordRaw[] = [
   {
     path: "/",
+    name: LAYOUT_ROUTE_NAME,
     component: Admin,
-    // 后台子路由
-    children: [
-      {
-        path: "/",
-        name: "Home",
-        meta: { title: "管理台首页" },
-        component: Home,
-      },
-      {
-        path: "/example",
-        name: "Example",
-        meta: { title: "例子" },
-        component: ExampleComp,
-      },
-    ],
+    meta: { title: "管理台首页" },
   },
   {
     path: "/login",
     name: "Login",
     meta: { title: "管理台登录页" },
-    component: loginComp,
+    component: () => Login,
   },
   {
     path: "/:pathMatch(.*)*",
@@ -48,7 +33,7 @@ const ROUTES: RouteRecordRaw[] = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: ROUTES,
+  routes: DEFAULT_ROUTES,
 });
 
 export default initRouter(router);

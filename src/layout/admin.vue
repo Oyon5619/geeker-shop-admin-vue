@@ -6,10 +6,10 @@ import TagList from "./components/tagList.vue";
 
 <template>
   <n-layout class="h-full">
-    <n-layout-header class="fixed z-50">
+    <n-layout-header class="fixed z-100">
       <AppHeader />
     </n-layout-header>
-    <n-layout class="pt-12 h-full" has-sider>
+    <n-layout class="pt-14 h-full" has-sider>
       <AppMenu />
       <n-layout-content>
         <TagList />

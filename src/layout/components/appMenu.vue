@@ -2,23 +2,22 @@
 import { useMenuManager } from "@/hooks/useMenuManager";
 import { onMounted } from "vue";
 
-const { menuOptions, initMenuOptions, onMenuSelect } = useMenuManager();
-
-onMounted(() => {
-  initMenuOptions();
-});
+const { menuOptions, defaultActive, onMenuSelect } = useMenuManager();
 </script>
 
 <template>
   <n-layout-sider
-    class="shadow-md"
+    class="shadow-lg"
     collapse-mode="width"
-    :collapse-width="64"
-    :width="300"
-    show-trigger
-    bordered
+    :collapsed="$store.state.isCollapsed"
   >
-    <n-menu :options="menuOptions" @update:value="onMenuSelect" />
+    <n-menu
+      :options="menuOptions"
+      :default-value="defaultActive"
+      :watch-props="['defaultValue', 'defaultExpandedKeys']"
+      @update-value="onMenuSelect"
+      accordion
+    />
   </n-layout-sider>
 </template>
 

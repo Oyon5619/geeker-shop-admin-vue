@@ -1,11 +1,22 @@
-import store from "@/store";
 import { getToken } from "@/utils/auth";
 import { showToast } from "@/utils/popup";
 import { beginFullLoading, endFullLoading } from "@/utils/progress";
 import { cloneDeep } from "lodash";
 import type { Router } from "vue-router";
+import { LAZY_ROUTES } from "./lazyRoutes";
+import { LAYOUT_ROUTE_NAME } from "@/constants/common";
 
-export function initRouter(router: Router) {
+const registerLayoutRoute = (router: Router, toPath: string) => {
+  const target = LAZY_ROUTES.find(({ path }) => path === toPath);
+  if (!target || router.hasRoute(target.name ?? "")) {
+    return false;
+  }
+
+  router.addRoute(LAYOUT_ROUTE_NAME, target);
+  return true;
+};
+
+export const initRouter = (router: Router) => {
   const resultRouter = cloneDeep(router);
 
   // 全局路由前置守卫
@@ -27,15 +38,14 @@ export function initRouter(router: Router) {
       return next({ path: from.path ?? "/" });
     }
 
-    if (token) {
-      await store.dispatch("getAdminInfo");
-    }
+    // 动态注册路由
+    const isNewRoute = registerLayoutRoute(resultRouter, to.fullPath);
 
     // 设置页面标题
     const pageTitle = (to.meta.title as string) ?? "";
     document.title = pageTitle;
 
-    next();
+    isNewRoute ? next(to.fullPath) : next();
   });
 
   // 全局后置守卫
@@ -44,4 +54,4 @@ export function initRouter(router: Router) {
   });
 
   return resultRouter;
-}
+};
