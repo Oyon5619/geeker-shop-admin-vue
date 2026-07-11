@@ -12,7 +12,7 @@ import TabList from "./components/tabList.vue";
     <n-layout class="pt-14 h-full" has-sider>
       <AppMenu />
       <n-layout-content>
-        <n-flex class="border h-full p-4 overflow-hidden" vertical>
+        <n-flex class="h-full p-4 bg-gray-100 overflow-hidden" vertical>
           <TabList />
           <RouterView v-slot="{ Component }">
             <div class="main-container">
@@ -33,7 +33,7 @@ import TabList from "./components/tabList.vue";
 @reference "@/styles/index.css";
 
 .main-container {
-  @apply flex-1 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-white;
+  @apply flex-1 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-white shadow-lg bg-white;
 }
 
 /** 下面这些类选择器配合Transition组件用 */

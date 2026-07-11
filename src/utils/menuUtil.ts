@@ -2,8 +2,7 @@ import type { AdminMenu } from "@/types/apiTypes";
 import type { MenuItem } from "@/types/menuItemn";
 import { cloneDeep } from "lodash";
 import { ICON_MAP } from "./iconMap";
-import { h, type Component } from "vue";
-import { NIcon } from "naive-ui";
+import { renderIcon } from "./iconRender";
 
 /** 从接口返回的menus里查找指定menu数据(根据id/path查找) */
 export const findAdminMenu = (
@@ -28,10 +27,6 @@ export const findAdminMenu = (
       }
     }
   }
-};
-
-const renderIcon = (icon: Component) => {
-  return () => h(NIcon, null, { default: () => h(icon) });
 };
 
 /** 将接口返回的menus映射成能渲染NMenu组件的数据 */

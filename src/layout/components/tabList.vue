@@ -29,6 +29,7 @@ watch(
     v-model:value="$store.state.activeTabKey"
     type="card"
     size="small"
+    tab-style="background: white;"
     :closable="$store.getters.tabClosable"
     @close="onCloseTab"
   >
