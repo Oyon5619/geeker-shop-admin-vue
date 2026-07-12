@@ -12,3 +12,6 @@ export const POPUP_DURATION = 3500;
 
 /** 主控台页面在menus数据里对应的id */
 export const HOME_PAGE_MENU_ID = 10;
+
+/** 数字滚动的延时默认值 */
+export const NUMBER_ROLLING_DURATION = 3000;

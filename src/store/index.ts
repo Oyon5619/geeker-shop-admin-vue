@@ -29,7 +29,7 @@ const store = createStore<StoreState>({
         const target = findAdminMenu(path, menus);
         return target?.id;
       },
-    tabClosable: ({ tabList }) => tabList.length > 1,
+    tabClosable: ({ tabList = [] }) => tabList.length > 1,
   },
   mutations: {
     SET_ADMININFO(state, value) {
@@ -116,13 +116,13 @@ const store = createStore<StoreState>({
 
     // 新增某个标签导航
     addTab({ commit, state }, newTab: TabItem) {
-      const target = state.tabList.find(({ key }) => key === newTab.key);
+      const target = state.tabList?.find(({ key }) => key === newTab.key);
       if (target) {
         commit("SET_ACTIVE_TAB_KEY", target.key);
         return;
       }
 
-      state.tabList.push(newTab);
+      state.tabList?.push(newTab);
       commit("SET_ACTIVE_TAB_KEY", newTab.key);
     },
 
@@ -138,6 +138,10 @@ const store = createStore<StoreState>({
 
     // 关闭某个导航标签
     removeTab({ commit, state }, key: number) {
+      if (!state.tabList?.length) {
+        return;
+      }
+
       const index = state.tabList.findIndex((item) => item.key === key);
       if (index === -1) {
         return;
@@ -154,7 +158,7 @@ const store = createStore<StoreState>({
     },
 
     removeTabByRoutePath({ dispatch, state }, routePath: string) {
-      const targetTab = state.tabList.find(
+      const targetTab = state.tabList?.find(
         (item) => item.routePath === routePath,
       );
       if (!targetTab) {

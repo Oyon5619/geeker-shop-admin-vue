@@ -13,7 +13,7 @@ const onCloseTab = (key: number) => {
 watch(
   () => store.state.activeTabKey,
   (value) => {
-    const target = store.state.tabList.find((item) => item.key === value);
+    const target = store.state.tabList?.find((item) => item.key === value);
     if (!target) {
       return;
     }

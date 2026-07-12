@@ -70,8 +70,8 @@ export interface PanelData {
   subUnit?: string;
 }
 
-interface StatusInfo {
-  lebel: string;
+export interface StatusInfo {
+  label: string;
   value?: number;
 }
 
@@ -84,7 +84,7 @@ export interface GetUnitStatusStatisticResp {
   order: StatusInfo[];
 }
 
-export interface GetGraphStatisticResp {
+export interface GetChartStatisticResp {
   x: string[];
   y: number[];
 }

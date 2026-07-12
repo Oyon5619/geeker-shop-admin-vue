@@ -1,6 +1,6 @@
 import type {
   BaseResp,
-  GetGraphStatisticResp,
+  GetChartStatisticResp,
   GetUnitMainStatisticResp,
   GetUnitStatusStatisticResp,
 } from "@/types/apiTypes";
@@ -21,9 +21,9 @@ export const getUnitStatusStatisticApi = async () =>
   });
 
 // 获取图表统计数据
-export const getGraphStatisticApi = async (hour: string) =>
-  request<unknown, BaseResp<GetGraphStatisticResp>>({
+export const getChartStatisticApi = async (timeType?: string) =>
+  request<unknown, BaseResp<GetChartStatisticResp>>({
     url: "/admin/statistics3",
     method: "GET",
-    params: { hour },
+    params: { type: timeType },
   });

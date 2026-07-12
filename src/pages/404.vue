@@ -23,6 +23,7 @@ export default {
     status="404"
     title="404 页面未找到"
     description="生活总归带点荒谬"
+    size="huge"
   >
     <template #footer>
       <n-button type="primary" @click="backToHome">回到首页</n-button>
