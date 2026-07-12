@@ -11,7 +11,7 @@ export interface StoreState {
   /**  */
   ruleNames: string[];
   /** 标签导航列表 */
-  tabList: TabItem[];
+  tabList?: TabItem[];
   /** 当前点击的标签对应的key */
   activeTabKey?: number;
 }

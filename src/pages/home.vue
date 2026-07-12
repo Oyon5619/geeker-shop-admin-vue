@@ -4,17 +4,31 @@ import { onMounted } from "vue";
 import { TAG_COLOR_MAP } from "@/utils/tagColorMap";
 import { CountTo } from "vue3-count-to";
 import HomeUnitNav from "@/components/homeUnitNav.vue";
+import HomeChartCard from "@/components/homeChartCard.vue";
+import DataStatusCard from "@/components/dataStatusCard.vue";
+import { NUMBER_ROLLING_DURATION } from "@/constants/common";
 
-const { unitPanelData, isUnitMainLoading, getUnitMainStatistic } =
-  useDataStatistic();
+const {
+  timeType,
+  unitPanelData,
+  chartData,
+  unitStatusData,
+  isUnitMainLoading,
+  isChartLoading,
+  getUnitMainStatistic,
+  getUnitStatusStatistic,
+  onSelectTimeType,
+} = useDataStatistic();
 
 onMounted(() => {
+  // 获取首页主要模块的统计数据
   getUnitMainStatistic();
+  getUnitStatusStatistic();
 });
 </script>
 
 <template>
-  <n-space class="min-h-full p-4" vertical>
+  <n-space class="min-h-full" vertical>
     <n-grid v-if="isUnitMainLoading" :cols="4" :x-gap="12">
       <n-gi v-for="i in 4" :key="i">
         <n-card
@@ -53,7 +67,11 @@ onMounted(() => {
           </template>
           <template #default>
             <p class="text-5xl font-bold text-gray-500">
-              <CountTo :start-val="0" :end-val="item.value" :duration="3000" />
+              <CountTo
+                :start-val="0"
+                :end-val="item.value"
+                :duration="NUMBER_ROLLING_DURATION"
+              />
             </p>
           </template>
           <template #footer>
@@ -66,5 +84,29 @@ onMounted(() => {
       </n-gi>
     </n-grid>
     <HomeUnitNav />
+    <n-grid :cols="2" :x-gap="12">
+      <n-gi>
+        <HomeChartCard
+          v-model="timeType"
+          :loading="isChartLoading"
+          :chart-data="chartData"
+          @select="onSelectTimeType"
+        />
+      </n-gi>
+      <n-gi>
+        <n-space vertical>
+          <DataStatusCard
+            title="店铺及商品提示"
+            sub-title="店铺及商品提示"
+            :items="unitStatusData?.goods"
+          />
+          <DataStatusCard
+            title="交易提示"
+            sub-title="需要立即处理的交易订单"
+            :items="unitStatusData?.order"
+          />
+        </n-space>
+      </n-gi>
+    </n-grid>
   </n-space>
 </template>

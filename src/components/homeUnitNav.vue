@@ -77,7 +77,7 @@ const onClickUnit = (path: string) => {
         @click="onClickUnit(item.path)"
         hoverable
       >
-        <n-flex justify="center" align="center">
+        <n-flex justify="center" align="center" vertical>
           <n-icon size="35" :class="item.class" :component="item.iconComp" />
           <div class="font-thin text-lg">{{ item.title }}</div>
         </n-flex>
