@@ -606,6 +606,11 @@ copy-anything@^4:
   dependencies:
     is-what "^5.2.0"
 
+core-js@^3.8.1:
+  version "3.49.0"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.49.0.tgz#8b4d520ac034311fa21aa616f017ada0e0dbbddd"
+  integrity sha512-es1U2+YTtzpwkxVLwAFdSpaIMyQaq0PBgm3YD1W3Qpsn1NAmO3KSgZfu+oGSWVu6NvLHoHCV/aYcsE5wiB7ALg==
+
 css-render@^0.15.10, css-render@^0.15.14:
   version "0.15.14"
   resolved "https://registry.npmjs.org/css-render/-/css-render-0.15.14.tgz#c23d8c8b9c0b44cd20b426f5e9de7ef7bade69b8"
@@ -1329,6 +1334,11 @@ vscode-uri@^3.0.8:
   resolved "https://registry.npmjs.org/vscode-uri/-/vscode-uri-3.1.0.tgz#dd09ec5a66a38b5c3fffc774015713496d14e09c"
   integrity sha512-/BpdSx+yCQGnCvecbyXdxHDkuk55/G3xwnC0GqY4gmQ3j+A+g8kzzgB4Nk/SINjqn6+waqw3EgbVF2QKExkRxQ==
 
+vue-count-to@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.npmjs.org/vue-count-to/-/vue-count-to-1.0.13.tgz#3e7573ea6e64c2b2972f64e0a2ab2e23c7590ff3"
+  integrity sha512-6R4OVBVNtQTlcbXu6SJ8ENR35M2/CdWt3Jmv57jOUM+1ojiFmjVGvZPH8DfHpMDSA+ITs+EW5V6qthADxeyYOQ==
+
 vue-hooks-plus@^2.4.3:
   version "2.4.3"
   resolved "https://registry.npmjs.org/vue-hooks-plus/-/vue-hooks-plus-2.4.3.tgz#6129c2c7a5084e358946b60f7d4bf52f75ff582e"
@@ -1354,6 +1364,14 @@ vue-tsc@^3.3.5:
   dependencies:
     "@volar/typescript" "2.4.28"
     "@vue/language-core" "3.3.6"
+
+vue3-count-to@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/vue3-count-to/-/vue3-count-to-1.1.2.tgz#a4f48947371f25b4edc940c482ddb89aaebb2462"
+  integrity sha512-C5AvlcGfyM4XvFqPDkni94rqGd5K/+RB+B4xv/1NQx3RrdC+GvXPFzeXW5hWL/jh8ehWLm4LITyK0eMKf4iJbg==
+  dependencies:
+    core-js "^3.8.1"
+    vue-count-to "^1.0.13"
 
 vue@^3.5.39:
   version "3.5.39"

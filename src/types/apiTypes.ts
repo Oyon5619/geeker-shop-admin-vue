@@ -5,6 +5,8 @@ export interface BaseResp<T = unknown> {
   data?: T;
 }
 
+/** --------------------- 管理员模块 --------------------- */
+
 /** 管理员登录请求体 */
 export interface LoginApiReq {
   username: string;
@@ -54,4 +56,35 @@ export interface ModifyAdminPwdReq {
   oldpassword: string;
   password: string;
   repassword: string;
+}
+
+/** --------------------- 首页统计模块 --------------------- */
+
+export interface PanelData {
+  title: string;
+  value: number;
+  unit: string;
+  unitColor: string;
+  subTitle: string;
+  subValue: number;
+  subUnit?: string;
+}
+
+interface StatusInfo {
+  lebel: string;
+  value?: number;
+}
+
+export interface GetUnitMainStatisticResp {
+  panels: PanelData[];
+}
+
+export interface GetUnitStatusStatisticResp {
+  goods: StatusInfo[];
+  order: StatusInfo[];
+}
+
+export interface GetGraphStatisticResp {
+  x: string[];
+  y: number[];
 }
