@@ -1,4 +1,4 @@
-import type { LoginApiReq } from "@/types/apiTypes";
+import type { LoginApiReq } from "@/types/apiTypes/adminApiTypes";
 import { useRequest } from "vue-hooks-plus";
 import store from "@/store";
 import { useRouter } from "vue-router";

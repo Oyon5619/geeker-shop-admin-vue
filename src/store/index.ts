@@ -1,6 +1,6 @@
 import { getAdminInfoApi, loginApi, logoutApi } from "@/api/adminApi";
 import { HOME_PAGE_MENU_ID, SYSTEM_APP_NAME } from "@/constants/common";
-import type { LoginApiReq } from "@/types/apiTypes";
+import type { LoginApiReq } from "@/types/apiTypes/adminApiTypes";
 import type { StoreState } from "@/types/storeTypes";
 import type { TabItem } from "@/types/tabItem";
 import { removeToken, setToken } from "@/utils/auth";

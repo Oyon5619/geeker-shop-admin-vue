@@ -1,10 +1,10 @@
 import type {
-  BaseResp,
   GetAdminInfoApiResp,
   LoginApiReq,
   LoginApiResp,
   ModifyAdminPwdReq,
-} from "@/types/apiTypes";
+} from "@/types/apiTypes/adminApiTypes";
+import type { BaseResp } from "@/types/apiTypes/baseResp";
 import request from "@/utils/request";
 
 // 管理员登录api

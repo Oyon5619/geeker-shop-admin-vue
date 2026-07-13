@@ -1,4 +1,4 @@
-import type { BaseResp } from "@/types/apiTypes";
+import type { BaseResp } from "@/types/apiTypes/baseResp";
 import axios, { AxiosError, type AxiosRequestConfig } from "axios";
 import { showToast } from "./popup";
 import { getToken } from "./auth";
