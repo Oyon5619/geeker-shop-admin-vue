@@ -5,7 +5,6 @@ import { cloneDeep } from "lodash";
 import type { Router } from "vue-router";
 import { LAZY_ROUTES } from "./lazyRoutes";
 import { LAYOUT_ROUTE_NAME } from "@/constants/common";
-import { findAdminMenu } from "@/utils/menuUtil";
 import store from "@/store";
 
 // ...待优化

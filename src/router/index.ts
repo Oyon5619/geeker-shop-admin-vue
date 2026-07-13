@@ -3,7 +3,7 @@ import {
   createWebHashHistory,
   type RouteRecordRaw,
 } from "vue-router";
-import { initRouter } from "./permission";
+import { initRouter } from "./initRouter";
 
 import NotFound from "@/pages/404.vue";
 import Admin from "@/layout/admin.vue";
