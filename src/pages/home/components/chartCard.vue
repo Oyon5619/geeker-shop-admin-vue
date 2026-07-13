@@ -1,24 +1,19 @@
 <script lang="ts" setup>
+import { getChartStatisticApi } from "@/api/statisticApi";
 import { TIME_TYPE } from "@/constants/dateTime";
-import type { GetChartStatisticResp } from "@/types/apiTypes";
 import {
   init as initEchart,
   dispose as disposeEchart,
   type EChartsOption,
   type EChartsType,
 } from "echarts";
-import { onBeforeUnmount, onUpdated, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import { useResizeObserver } from "vue-hooks-plus";
 
 let chartDom: Element | null;
 const chart = ref<EChartsType>();
 const chartRef = ref(null);
-const modelValue = defineModel<string>();
-const { loading, chartData } = defineProps<{
-  loading: boolean;
-  chartData?: GetChartStatisticResp;
-}>();
-const emit = defineEmits(["select"]);
+const timeType = ref<string>(TIME_TYPE.HOUR);
 
 const TAG_OPTIONS = [
   {
@@ -35,22 +30,28 @@ const TAG_OPTIONS = [
   },
 ];
 
-const onSelect = (value: string) => {
-  emit("select", value);
-};
-
 // 初始化图表选项
-const initChart = () => {
-  chart.value = initEchart(chartDom as HTMLElement);
+const initChart = async (chartDom: HTMLElement) => {
+  chart.value = initEchart(chartDom);
+
+  chart.value.showLoading();
+  const { data: chartData } = await getChartStatisticApi(timeType.value);
 
   const { x: xData = [], y: yData = [] } = chartData ?? {};
   const chartOption: EChartsOption = {
+    grid: { top: 10, left: 10, right: 10, bottom: 10 },
     xAxis: { type: "category", data: xData },
     yAxis: { type: "value" },
     series: [{ data: yData, type: "bar", showBackground: true }],
   };
 
   chart.value.setOption(chartOption);
+  chart.value.hideLoading();
+};
+
+const onSelect = (value: string) => {
+  timeType.value = value;
+  initChart(chartDom as HTMLElement);
 };
 
 useResizeObserver(chartRef, () => {
@@ -59,13 +60,13 @@ useResizeObserver(chartRef, () => {
   }
 });
 
-onUpdated(() => {
+onMounted(() => {
   chartDom = document.querySelector("#chart");
-  if (!chartDom || loading) {
+  if (!chartDom) {
     return;
   }
 
-  initChart();
+  initChart(chartDom as HTMLElement);
 });
 
 onBeforeUnmount(() => {
@@ -80,7 +81,7 @@ onBeforeUnmount(() => {
 <template>
   <n-card title="订单统计" class="shadow-md" segmented hoverable>
     <template #header-extra>
-      <n-radio-group v-model:value="modelValue" @update:value="onSelect">
+      <n-radio-group v-model:value="timeType" @update:value="onSelect">
         <n-radio-button
           v-for="item in TAG_OPTIONS"
           :key="item.value"
@@ -90,12 +91,12 @@ onBeforeUnmount(() => {
       </n-radio-group>
     </template>
     <template #default>
-      <div v-if="loading">
+      <!-- <div v-if="isChartLoading">
         <n-spin description="loading...">
           <div class="h-70" />
         </n-spin>
-      </div>
-      <div v-else id="chart" ref="chartRef" class="h-70" />
+      </div> -->
+      <div id="chart" ref="chartRef" class="h-70" />
     </template>
   </n-card>
 </template>

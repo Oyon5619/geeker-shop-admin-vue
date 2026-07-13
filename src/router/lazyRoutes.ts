@@ -6,7 +6,7 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     path: "/",
     name: "Home",
     meta: { title: "管理台首页" },
-    component: () => import("@/pages/home.vue"),
+    component: () => import("@/pages/home/index.vue"),
   },
   {
     path: "/goods/list",
