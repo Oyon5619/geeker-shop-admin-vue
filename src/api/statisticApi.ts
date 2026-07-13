@@ -1,9 +1,9 @@
+import type { BaseResp } from "@/types/apiTypes/baseResp";
 import type {
-  BaseResp,
   GetChartStatisticResp,
   GetUnitMainStatisticResp,
   GetUnitStatusStatisticResp,
-} from "@/types/apiTypes";
+} from "@/types/apiTypes/statisticApiTypes";
 import request from "@/utils/request";
 
 // 获取首页主要单元的统计数据

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { NUMBER_ROLLING_DURATION } from "@/constants/common";
-import type { StatusInfo } from "@/types/apiTypes";
+import type { StatusInfo } from "@/types/apiTypes/statisticApiTypes";
 import { CountTo } from "vue3-count-to";
 
 const {

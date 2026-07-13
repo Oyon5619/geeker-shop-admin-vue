@@ -1,11 +1,4 @@
-/** 基本响应体 */
-export interface BaseResp<T = unknown> {
-  msg: string;
-  errorCode?: string;
-  data?: T;
-}
-
-/** --------------------- 管理员模块 --------------------- */
+// 管理员模块Api的的请求/响应体类型
 
 /** 管理员登录请求体 */
 export interface LoginApiReq {
@@ -56,35 +49,4 @@ export interface ModifyAdminPwdReq {
   oldpassword: string;
   password: string;
   repassword: string;
-}
-
-/** --------------------- 首页统计模块 --------------------- */
-
-export interface PanelData {
-  title: string;
-  value: number;
-  unit: string;
-  unitColor: string;
-  subTitle: string;
-  subValue: number;
-  subUnit?: string;
-}
-
-export interface StatusInfo {
-  label: string;
-  value?: number;
-}
-
-export interface GetUnitMainStatisticResp {
-  panels: PanelData[];
-}
-
-export interface GetUnitStatusStatisticResp {
-  goods: StatusInfo[];
-  order: StatusInfo[];
-}
-
-export interface GetChartStatisticResp {
-  x: string[];
-  y: number[];
 }

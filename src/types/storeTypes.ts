@@ -1,4 +1,4 @@
-import type { AdminMenu, GetAdminInfoApiResp } from "./apiTypes";
+import type { AdminMenu, GetAdminInfoApiResp } from "./apiTypes/adminApiTypes";
 import type { TabItem } from "./tabItem";
 
 export interface StoreState {

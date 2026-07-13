@@ -1,6 +1,6 @@
 import { modifyAdminPwdApi } from "@/api/adminApi";
 import store from "@/store";
-import type { ModifyAdminPwdReq } from "@/types/apiTypes";
+import type { ModifyAdminPwdReq } from "@/types/apiTypes/adminApiTypes";
 import { showToast } from "@/utils/popup";
 import type { FormInst, FormRules } from "naive-ui";
 import { reactive, ref } from "vue";

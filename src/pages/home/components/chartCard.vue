@@ -91,11 +91,6 @@ onBeforeUnmount(() => {
       </n-radio-group>
     </template>
     <template #default>
-      <!-- <div v-if="isChartLoading">
-        <n-spin description="loading...">
-          <div class="h-70" />
-        </n-spin>
-      </div> -->
       <div id="chart" ref="chartRef" class="h-70" />
     </template>
   </n-card>

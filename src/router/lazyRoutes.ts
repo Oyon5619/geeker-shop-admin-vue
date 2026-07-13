@@ -44,4 +44,10 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     meta: { title: "会员等级管理" },
     component: () => import("@/pages/user/levelList.vue"),
   },
+  {
+    path: "/image/list",
+    name: "imageList",
+    meta: { title: "图库管理" },
+    component: () => import("@/pages/other/imageList.vue"),
+  },
 ];
