@@ -7,21 +7,21 @@ import type {
 import request from "@/utils/request";
 
 // 获取首页主要单元的统计数据
-export const getUnitMainStatisticApi = async () =>
+export const getUnitMainStatisticApi = () =>
   request<unknown, BaseResp<GetUnitMainStatisticResp>>({
     url: "/admin/statistics1",
     method: "GET",
   });
 
 // 获取首页各单元的状态统计数据
-export const getUnitStatusStatisticApi = async () =>
+export const getUnitStatusStatisticApi = () =>
   request<unknown, BaseResp<GetUnitStatusStatisticResp>>({
     url: "/admin/statistics2",
     method: "GET",
   });
 
 // 获取图表统计数据
-export const getChartStatisticApi = async (timeType?: string) =>
+export const getChartStatisticApi = (timeType?: string) =>
   request<unknown, BaseResp<GetChartStatisticResp>>({
     url: "/admin/statistics3",
     method: "GET",

@@ -15,3 +15,9 @@ export const HOME_PAGE_MENU_ID = 10;
 
 /** 数字滚动的延时默认值 */
 export const NUMBER_ROLLING_DURATION = 3000;
+
+/** 默认分隔符 */
+export const DEFAULT_SEPARATOR = "";
+
+/** 空格 */
+export const SPACE = " ";
