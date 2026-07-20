@@ -33,7 +33,7 @@ import TabList from "./components/tabList.vue";
 @reference "@/styles/index.css";
 
 .main-container {
-  @apply flex-1 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-white;
+  @apply flex-1 overflow-x-hidden overflow-y-auto;
 }
 
 /** 下面这些类选择器配合Transition组件用 */

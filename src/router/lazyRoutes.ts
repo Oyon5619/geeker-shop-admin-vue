@@ -48,6 +48,6 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     path: "/image/list",
     name: "imageList",
     meta: { title: "图库管理" },
-    component: () => import("@/pages/other/imageList.vue"),
+    component: () => import("@/pages/other/imgListWrapper.vue"),
   },
 ];

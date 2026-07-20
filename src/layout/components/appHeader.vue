@@ -10,11 +10,12 @@ import FormDrawer from "@/components/formDrawer.vue";
 import { useModifyAdminPwd } from "@/hooks/useModifyAdminPwd";
 import { debounce } from "lodash";
 import { SYSTEM_APP_NAME } from "@/constants/common";
+import type { FormDrawerRef } from "@/types/compRef/formDrawerRef";
 
 const adminName = store.state.adminInfo?.username;
 
 const isShowProfile = ref(false);
-const formDrawerRef = ref<{ onOpen?: () => void; onClose?: () => void }>({});
+const formDrawerRef = ref<FormDrawerRef>({});
 
 const [isFullScreen, { toggleFullscreen }] = useFullscreen();
 const { logout, logouting } = useLogin();
@@ -110,7 +111,12 @@ const onSubmitDebounce = debounce(onSubmit, 300);
 
 <template>
   <n-flex align="center" class="app-header">
-    <n-flex align="center" justify="center" class="w-60 cursor-pointer">
+    <n-flex
+      align="center"
+      justify="center"
+      class="w-60 cursor-pointer"
+      @click="$store.commit('TOGGLE_COLLAPSED')"
+    >
       <n-icon :component="Cube" size="35" />
       <p class="text-lg font-thin">{{ SYSTEM_APP_NAME }}</p>
     </n-flex>
