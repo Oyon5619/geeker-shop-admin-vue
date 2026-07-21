@@ -7,7 +7,7 @@ import type {
 import type { BaseResp } from "@/types/apiTypes/baseResp";
 import request from "@/utils/request";
 
-// 管理员登录api
+// 管理员登录
 export const loginApi = (data: LoginApiReq) =>
   request<LoginApiReq, BaseResp<LoginApiResp>>({
     url: "/admin/login",
@@ -22,7 +22,7 @@ export const logoutApi = () =>
     method: "POST",
   });
 
-// 获取管理员信息api
+// 获取管理员信息
 export const getAdminInfoApi = () =>
   request<unknown, BaseResp<GetAdminInfoApiResp>>({
     url: "/admin/getinfo",

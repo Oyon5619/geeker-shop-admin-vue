@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import Authority from "@/components/authority.vue";
 import ImgClassAside from "@/components/imgClassAside.vue";
 import ImgList from "@/components/imgList.vue";
 import UploadFileDrawer from "@/components/uploadFileDrawer.vue";
@@ -30,38 +31,29 @@ const onOpenUploadDrawer = () => {
 const onSelectImgClass = (id: number) => {
   imgListRef.value?.onQueryImgList(id);
 };
-
-const OPERATIONS = [
-  {
-    key: "addCategory",
-    type: "primary",
-    text: "新增图片分类",
-    onClick: onAddCategory,
-  },
-  {
-    key: "uploadImage",
-    type: "warning",
-    text: "上传图片",
-    onClick: onOpenUploadDrawer,
-  },
-];
 </script>
 
 <template>
   <n-flex class="bg-white h-full p-4" vertical>
     <n-flex align="center">
-      <n-button
-        size="small"
-        v-for="item in OPERATIONS"
-        :key="item.text"
-        :type="item.type"
-        @click="item.onClick"
-        >{{ item.text }}</n-button
-      >
+      <Authority :permission="['createImageClass,POST']">
+        <n-button size="small" type="primary" @click="onAddCategory">
+          新增图片分类
+        </n-button>
+      </Authority>
+      <Authority :permission="['uploadImage,POST']">
+        <n-button size="small" type="warning" @click="onOpenUploadDrawer">
+          上传图片
+        </n-button>
+      </Authority>
     </n-flex>
     <div class="flex h-full relative overflow-hidden">
-      <ImgClassAside ref="asideRef" @select="onSelectImgClass" />
-      <ImgList ref="imgListRef" />
+      <Authority :permission="['getImageClassList,GET']">
+        <ImgClassAside ref="asideRef" @select="onSelectImgClass" />
+      </Authority>
+      <Authority :permission="['getCurrentImageList,GET']">
+        <ImgList ref="imgListRef" />
+      </Authority>
     </div>
   </n-flex>
   <UploadFileDrawer ref="drawerRef" @finish="onSelectImgClass" />

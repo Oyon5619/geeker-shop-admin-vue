@@ -50,4 +50,22 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     meta: { title: "图库管理" },
     component: () => import("@/pages/other/imgListWrapper.vue"),
   },
+  {
+    path: "/notice/list",
+    name: "noticeList",
+    meta: { title: "公告管理" },
+    component: () => import("@/pages/other/noticeList.vue"),
+  },
+  {
+    path: "/distribution/setting",
+    name: "distributeSettings",
+    meta: { title: "分销设置" },
+    component: () => import("@/pages/distribution/distributeSettings.vue"),
+  },
+  {
+    path: "/distribution/index",
+    name: "distributorList",
+    meta: { title: "分销员管理" },
+    component: () => import("@/pages/distribution/distributorList.vue"),
+  },
 ];

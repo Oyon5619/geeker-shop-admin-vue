@@ -2,7 +2,7 @@
 import { MAX_UPLOAD_NUM, UPLOAD_ACTION } from "@/constants/upload";
 import { ArchiveSharp } from "@vicons/ionicons5";
 import { ref } from "vue";
-import { NUpload, NUploadDragger, type UploadSettledFileInfo } from "naive-ui";
+import type { UploadSettledFileInfo } from "naive-ui";
 import { getToken } from "@/utils/auth";
 import { showToast } from "@/utils/popup";
 import { isType, safeJsonParse } from "@/utils/common";

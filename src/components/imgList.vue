@@ -6,7 +6,7 @@ import { showToast, useDialog } from "@/utils/popup";
 import type { ImgInfo } from "@/types/apiTypes/imageApiTypes";
 import { reactive, ref } from "vue";
 import type { FormInst, FormRules } from "naive-ui";
-import { NModal } from "naive-ui";
+import Authority from "./authority.vue";
 
 const isShowModal = ref(false);
 const formRef = ref<FormInst>();
@@ -112,12 +112,16 @@ defineExpose({ onQueryImgList });
             <n-flex align="center">
               <n-ellipsis class="w-30">{{ item.name }}</n-ellipsis>
               <n-space size="small" class="ml-auto">
-                <n-button size="small" type="info" @click="onModifyName(item)"
-                  >重命名</n-button
-                >
-                <n-button size="small" type="error" @click="onRemove(item.id)"
-                  >删除</n-button
-                >
+                <Authority :permission="['updateImage,POST']">
+                  <n-button size="small" type="info" @click="onModifyName(item)"
+                    >重命名</n-button
+                  >
+                </Authority>
+                <Authority :permission="['deleteImage,POST']">
+                  <n-button size="small" type="error" @click="onRemove(item.id)"
+                    >删除</n-button
+                  >
+                </Authority>
               </n-space>
             </n-flex>
           </template>
