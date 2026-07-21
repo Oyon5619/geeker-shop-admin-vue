@@ -1,7 +1,7 @@
 import type { MenuItem } from "@/types/menuItemn";
 import { cloneDeep } from "lodash";
 import { ICON_MAP } from "./iconMap";
-import { renderIcon } from "./iconRender";
+import { renderIcon } from "./hRender";
 import type { AdminMenu } from "@/types/apiTypes/adminApiTypes";
 
 /** 从接口返回的menus里查找指定menu数据(根据id/path查找) */
