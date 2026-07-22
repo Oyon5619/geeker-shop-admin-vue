@@ -21,7 +21,7 @@ const DEFAULT_ROUTES: RouteRecordRaw[] = [
     path: "/login",
     name: "Login",
     meta: { title: "管理台登录页" },
-    component: () => Login,
+    component: Login,
   },
   {
     path: "/:pathMatch(.*)*",
