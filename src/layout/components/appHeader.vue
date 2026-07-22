@@ -15,7 +15,7 @@ import type { FormDrawerRef } from "@/types/compRef/formDrawerRef";
 const adminName = store.state.adminInfo?.username;
 
 const isShowProfile = ref(false);
-const formDrawerRef = ref<FormDrawerRef>({});
+const formDrawerRef = ref<FormDrawerRef>();
 
 const [isFullScreen, { toggleFullscreen }] = useFullscreen();
 const { logout, logouting } = useLogin();
@@ -60,7 +60,7 @@ const onLogout = () => {
 
 // 打开修改密码抽屉
 const onOpenModifyPwdDrawer = () => {
-  formDrawerRef.value.onOpen?.();
+  formDrawerRef.value?.onOpen();
 };
 
 // 关闭修改密码抽屉
