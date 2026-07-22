@@ -1,4 +1,4 @@
 export interface FormDrawerRef {
-  onOpen?: () => void;
-  onClose?: () => void;
+  onOpen: () => void;
+  onClose: () => void;
 }

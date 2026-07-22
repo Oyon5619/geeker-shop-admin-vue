@@ -39,7 +39,12 @@ defineExpose({
 </script>
 
 <template>
-  <n-drawer v-model:show="visible" :width="width">
+  <n-drawer
+    v-model:show="visible"
+    :width="width"
+    @mask-click="onClose"
+    @after-leave="onClose"
+  >
     <n-drawer-content :title="title" closable>
       <n-flex vertical class="h-full">
         <div class="flex-1 overflow-y-auto">
