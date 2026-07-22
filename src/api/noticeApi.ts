@@ -34,7 +34,7 @@ export const getNoticeListApi = (page: number) =>
   });
 
 // 删除公告
-export const removeNoticeApi = (id?: number) =>
+export const removeNoticeApi = (id: number) =>
   request<unknown, BaseResp<boolean>>({
     url: `/admin/notice/${id}/delete`,
     method: "POST",
