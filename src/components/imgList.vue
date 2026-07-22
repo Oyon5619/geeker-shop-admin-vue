@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { useImgListManager } from "@/hooks/useImgListManager";
-import { INITIAL_PAGINATION_8, PAGE_SIZE_8 } from "@/constants/pagination";
+import {
+  DEFAULT_PAGE,
+  INITIAL_PAGINATION_8,
+  PAGE_SIZE_8,
+} from "@/constants/pagination";
 import { ImageSharp } from "@vicons/ionicons5";
 import { showToast, useDialog } from "@/utils/popup";
 import type { ImgInfo } from "@/types/apiTypes/imageApiTypes";
@@ -32,6 +36,7 @@ const {
 
 const onQueryImgList = (id?: number) => {
   imgClassId.value = id;
+  currentPage.value = DEFAULT_PAGE;
   getImgListByClass({ ...INITIAL_PAGINATION_8, id });
 };
 

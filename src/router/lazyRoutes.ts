@@ -68,4 +68,52 @@ export const LAZY_ROUTES: RouteRecordRaw[] = [
     meta: { title: "分销员管理" },
     component: () => import("@/pages/distribution/distributorList.vue"),
   },
+  {
+    path: "/manager/list",
+    name: "ManagerList",
+    meta: { title: "管理员管理" },
+    component: () => import("@/pages/manager/managerList.vue"),
+  },
+  {
+    path: "/access/list",
+    name: "AccessList",
+    meta: { title: "权限管理" },
+    component: () => import("@/pages/manager/accessList.vue"),
+  },
+  {
+    path: "/role/list",
+    name: "RoleList",
+    meta: { title: "角色管理" },
+    component: () => import("@/pages/manager/roleList.vue"),
+  },
+  {
+    path: "/order/list",
+    name: "OrderList",
+    meta: { title: "订单管理" },
+    component: () => import("@/pages/order/orderList.vue"),
+  },
+  {
+    path: "/comment/list",
+    name: "CommentList",
+    meta: { title: "评论管理" },
+    component: () => import("@/pages/order/commentList.vue"),
+  },
+  {
+    path: "/setting/base",
+    name: "BaseSetting",
+    meta: { title: "基础设置" },
+    component: () => import("@/pages/setting/baseSetting.vue"),
+  },
+  {
+    path: "/setting/buy",
+    name: "PaymentSetting",
+    meta: { title: "支付设置" },
+    component: () => import("@/pages/setting/paymentSetting.vue"),
+  },
+  {
+    path: "/setting/ship",
+    name: "StreamSetting",
+    meta: { title: "物流设置" },
+    component: () => import("@/pages/setting/streamSetting.vue"),
+  },
 ];

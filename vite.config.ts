@@ -88,7 +88,7 @@ export default defineConfig(({ mode }) => {
               {
                 name: "common",
                 minShareCount: 2,
-                minSize: 10000,
+                minSize: 10000, // 10kb
                 priority: 5,
               },
             ],
