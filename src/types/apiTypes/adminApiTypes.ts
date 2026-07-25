@@ -50,3 +50,46 @@ export interface ModifyAdminPwdReq {
   password: string;
   repassword: string;
 }
+
+export interface GetManagerListApiReq {
+  page: number;
+  limit: number;
+  keyword?: string;
+}
+
+export interface ManagerInfo {
+  id: number;
+  status: number;
+  create_time: string;
+  update_time: string;
+  username: string;
+  avatar: string;
+  role_id: number;
+  super: number;
+  role: AdminRole;
+}
+
+export interface GetManagerListApiResp {
+  list: ManagerInfo[];
+  roles: AdminRole[];
+  totalCount: number;
+}
+
+export interface AddManagerApiReq {
+  username?: string;
+  password?: string;
+  role_id?: number;
+  status?: number;
+  avatar?: string;
+}
+
+export type AddManagerApiResp = Omit<ManagerInfo, "role">;
+
+export interface ModifyManagerApiReq extends AddManagerApiReq {
+  id?: number;
+}
+
+export interface ModifyManagerStatusApiReq {
+  id?: number;
+  status?: number;
+}

@@ -18,3 +18,7 @@ export const isType = (value: unknown, target: string) => {
 
   return lasts?.join(DEFAULT_SEPARATOR) === target;
 };
+
+export const textRender = (text?: string | number) => {
+  return text || "-";
+};

@@ -12,6 +12,9 @@ import { reactive, ref } from "vue";
 import type { FormInst, FormRules } from "naive-ui";
 import Authority from "./authority.vue";
 
+const { isReadOnly } = defineProps<{ isReadOnly?: boolean }>();
+const emit = defineEmits(["select"]);
+
 const isShowModal = ref(false);
 const formRef = ref<FormInst>();
 const formValues = reactive<{ id?: number; name?: string }>({});
@@ -87,6 +90,10 @@ const onCloseModal = () => {
   formValues.name = undefined;
 };
 
+const onSelectItem = (item: ImgInfo) => {
+  emit("select", item);
+};
+
 defineExpose({ onQueryImgList });
 </script>
 
@@ -104,10 +111,20 @@ defineExpose({ onQueryImgList });
       class="flex-1 overflow-y-auto bg-gray-200 p-3"
       :cols="4"
     >
-      <n-gi v-for="item in imgListData?.imgList" :key="item.id">
-        <n-card size="small" class="h-70" segmented hoverable>
+      <n-gi v-for="item in imgListData?.imgList" :key="item.id" class="h-fit">
+        <n-card
+          size="small"
+          class="h-70"
+          @click="onSelectItem(item)"
+          segmented
+          hoverable
+        >
           <template #cover>
-            <n-image :src="item.url" class="w-full h-60">
+            <n-image
+              :src="item.url"
+              class="w-full h-60 cursor-pointer"
+              :preview-disabled="isReadOnly"
+            >
               <template #error>
                 <n-icon size="200" :component="ImageSharp" />
               </template>
@@ -116,7 +133,7 @@ defineExpose({ onQueryImgList });
           <template #default>
             <n-flex align="center">
               <n-ellipsis class="w-30">{{ item.name }}</n-ellipsis>
-              <n-space size="small" class="ml-auto">
+              <n-space size="small" class="ml-auto" v-if="!isReadOnly">
                 <Authority :permission="['updateImage,POST']">
                   <n-button size="small" type="info" @click="onModifyName(item)"
                     >重命名</n-button

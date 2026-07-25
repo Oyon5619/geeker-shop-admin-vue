@@ -11,7 +11,7 @@ import VuexPersist from "vuex-persist";
 
 const persist = new VuexPersist({
   key: `${SYSTEM_APP_NAME.toUpperCase()}_SESSION`,
-  storage: sessionStorage,
+  storage: localStorage,
 });
 
 const store = createStore<StoreState>({

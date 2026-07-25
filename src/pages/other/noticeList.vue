@@ -6,7 +6,6 @@ import type { NoticeInfo } from "@/types/apiTypes/noticeApiTypes";
 import type { ButtonItem } from "@/types/buttonItem";
 import { renderButtonItems } from "@/utils/hRender";
 import { showToast, useDialog } from "@/utils/popup";
-import { NDataTable } from "naive-ui";
 import type { TableColumns } from "naive-ui/es/data-table/src/interface";
 import { onMounted } from "vue";
 
@@ -81,13 +80,14 @@ const COLUMNS: TableColumns<NoticeInfo> = [
   {
     key: "actions",
     title: "操作",
-    width: 180,
+    width: 160,
     fixed: "right",
     render: (row) => renderButtonItems<NoticeInfo>(actionButtons, row),
   },
 ];
 
 const onOpenDrawer = () => {
+  isEdit.value = false;
   formDrawerRef.value?.onOpen();
 };
 
@@ -115,7 +115,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full bg-white p-4">
+  <div class="h-full bg-white p-4 overflow-y-auto">
     <n-space vertical size="large">
       <n-flex>
         <n-button type="primary" size="small" @click="onOpenDrawer"
@@ -125,10 +125,11 @@ onMounted(() => {
           >刷新本页数据</n-button
         >
       </n-flex>
-
-      <n-spin :show="loading" description="加载公告数据中...">
-        <n-data-table :columns="COLUMNS" :data="noticeListData?.noticeList" />
-      </n-spin>
+      <n-data-table
+        :loading="loading"
+        :columns="COLUMNS"
+        :data="noticeListData?.noticeList"
+      />
       <n-flex justify="center">
         <n-pagination
           v-model:page="currentPage"
@@ -137,6 +138,7 @@ onMounted(() => {
           @update:page="onPagination"
           simple
         />
+        <p>共有 {{ noticeListData?.total }} 条数据</p>
       </n-flex>
     </n-space>
     <FormDrawer
