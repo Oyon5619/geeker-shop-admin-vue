@@ -8,6 +8,7 @@ import { computed, onMounted } from "vue";
 import FormDrawer from "./formDrawer.vue";
 import { showToast, useDialog } from "@/utils/popup";
 
+const { isReadOnly } = defineProps<{ isReadOnly?: boolean }>();
 const emit = defineEmits(["select"]);
 
 const {
@@ -148,7 +149,7 @@ defineExpose({
           @click="onItemActive(item)"
         >
           <p class="text-md">{{ item.name }}</p>
-          <n-flex align="center" class="ml-auto">
+          <n-flex align="center" class="ml-auto" v-if="!isReadOnly">
             <n-button
               v-for="iconItem in OPERATIONS"
               :key="iconItem.key"
