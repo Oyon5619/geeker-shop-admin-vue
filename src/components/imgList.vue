@@ -35,6 +35,7 @@ const {
   currentPage,
   imgListData,
   isSpinning,
+  resultText,
 } = useImgListManager();
 
 const onQueryImgList = (id?: number) => {
@@ -151,7 +152,7 @@ defineExpose({ onQueryImgList });
       </n-gi>
     </n-grid>
     <n-flex v-else justify="center" align="center" class="h-full flex-1">
-      <n-result status="info" title="当前图片数据为空" />
+      <n-result status="info" :title="resultText" />
     </n-flex>
     <n-flex
       justify="center"

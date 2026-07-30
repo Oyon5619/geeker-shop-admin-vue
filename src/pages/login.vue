@@ -58,6 +58,9 @@ onBeforeUnmount(() => {
         <p class="text-xl text-white">
           <strong>{{ SYSTEM_APP_NAME }}</strong> based on Vue 3.
         </p>
+        <p class="text-white underline">
+          该平台仅供学习参考使用, 不用于商业用途
+        </p>
       </n-flex>
     </n-grid-item>
     <n-grid-item span="4 m:2 l:1">

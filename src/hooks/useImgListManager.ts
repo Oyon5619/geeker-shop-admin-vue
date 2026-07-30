@@ -66,6 +66,10 @@ export const useImgListManager = () => {
     () => loading.value || isImgRemoving.value || isImgNameModifying.value,
   );
 
+  const resultText = computed(() =>
+    imgClassId.value ? "当前图片数据为空" : "请点击左侧任一图片分类",
+  );
+
   return {
     getImgListByClass,
     onPagination,
@@ -75,5 +79,6 @@ export const useImgListManager = () => {
     currentPage,
     imgListData,
     isSpinning,
+    resultText,
   };
 };

@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import CommonActions from "@/components/commonActions.vue";
 import FormDrawer from "@/components/formDrawer.vue";
 import { PAGE_SIZE_10 } from "@/constants/pagination";
 import { MANAGER_STATUS } from "@/constants/statusEnum";
@@ -195,14 +196,11 @@ onMounted(() => {
           </n-space>
         </n-form-item>
       </n-form>
-      <n-flex>
-        <n-button type="primary" size="small" @click="onFormDrawerOpen(false)"
-          >新增</n-button
-        >
-        <n-button size="small" @click="queryManagerList(currentPage)"
-          >刷新本页数据</n-button
-        >
-      </n-flex>
+      <CommonActions
+        refresh-text="刷新本页数据"
+        @add="onFormDrawerOpen(false)"
+        @refresh="queryManagerList(currentPage)"
+      />
       <n-data-table
         :loading="loading"
         :columns="COLUMNS"
@@ -221,7 +219,7 @@ onMounted(() => {
     </n-space>
     <FormDrawer
       ref="infoFormDrawerRef"
-      width="40%"
+      width="30%"
       :loading="isSubmitting"
       :title="`${addOrEditText}管理员信息`"
       :okText="`确定${addOrEditText}`"
