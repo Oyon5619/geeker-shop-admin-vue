@@ -43,7 +43,7 @@ export const mapToNMenuOptions = (data: AdminMenu[]): MenuItem[] => {
       key: id,
       label: name,
       routePath: frontpath,
-      icon,
+      icon: () => icon,
     };
     if (child?.length) {
       menuItem.children = mapToNMenuOptions(child);

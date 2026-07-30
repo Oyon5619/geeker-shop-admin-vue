@@ -1,11 +1,11 @@
 import type { ManagerInfo } from "@/types/apiTypes/adminApiTypes";
 import type { ButtonItem } from "@/types/buttonItem";
 import { NButton, NSpace, NIcon, NAvatar, NFlex, NSwitch } from "naive-ui";
-import { h, type Component } from "vue";
+import { h, type Component, type VNodeChild } from "vue";
 import { textRender } from "./common";
 
 export const renderIcon = (icon: Component) => {
-  return () => h(NIcon, null, { default: () => h(icon) });
+  return h(NIcon, null, { default: () => h(icon) });
 };
 
 export const renderButtonItems = <T = unknown>(
@@ -71,4 +71,8 @@ export const renderManagerStatus = (
       }
     },
   });
+};
+
+export const renderFlex = (children: VNodeChild[]) => {
+  return h(NFlex, { align: "center" }, { default: () => children });
 };
