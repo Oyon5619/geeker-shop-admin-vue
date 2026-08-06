@@ -15,7 +15,9 @@ declare module 'vue' {
     AvatarChooser: typeof import('./src/components/avatarChooser.vue')['default']
     AvatarSelector: typeof import('./src/components/avatarSelector.vue')['default']
     CommonActions: typeof import('./src/components/commonActions.vue')['default']
+    DynamicFormDrawer: typeof import('./src/components/dynamicFormDrawer.vue')['default']
     FormDrawer: typeof import('./src/components/formDrawer.vue')['default']
+    FullPage: typeof import('./src/components/fullPage.vue')['default']
     ImgClassAside: typeof import('./src/components/imgClassAside.vue')['default']
     ImgList: typeof import('./src/components/imgList.vue')['default']
     ImgSelectorModal: typeof import('./src/components/imgSelectorModal.vue')['default']
@@ -70,6 +72,8 @@ declare module 'vue' {
     NUploadDragger: typeof import('naive-ui')['NUploadDragger']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SimplePagination: typeof import('./src/components/simplePagination.vue')['default']
+    SubmitForm: typeof import('./src/components/submitForm.vue')['default']
     UploadFileDrawer: typeof import('./src/components/uploadFileDrawer.vue')['default']
   }
 }

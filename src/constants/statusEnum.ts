@@ -1,5 +1,5 @@
-/** 管理员状态 */
-export const MANAGER_STATUS = {
+/** 通用状态(管理员/角色) */
+export const COMMON_STATUS = {
   /** 有效 */
   VALID: 1,
   /** 禁用 */
