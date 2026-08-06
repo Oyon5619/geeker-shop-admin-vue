@@ -6,7 +6,7 @@ import {
   removeManagerApi,
 } from "@/api/adminApi";
 import { DEFAULT_PAGE, PAGE_SIZE_10 } from "@/constants/pagination";
-import { MANAGER_STATUS } from "@/constants/statusEnum";
+import { COMMON_STATUS } from "@/constants/statusEnum";
 import type {
   AddManagerApiReq,
   GetManagerListApiReq,
@@ -79,7 +79,7 @@ export const useAdminListManager = () => {
   const queryFormValue = reactive<{ keyword?: string }>({});
   const infoFormRef = ref<FormInst>();
   const infoFormValue = reactive<InfoFormValue>({
-    status: MANAGER_STATUS.VALID,
+    status: COMMON_STATUS.VALID,
   });
   const infoFormRules: FormRules = {
     username: {

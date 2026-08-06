@@ -1,4 +1,4 @@
-import type { MenuItem } from "@/types/menuItemn";
+import type { MenuItem } from "@/types/menuItem";
 import { cloneDeep } from "lodash";
 import { ICON_MAP } from "./iconMap";
 import { renderIcon } from "./hRender";

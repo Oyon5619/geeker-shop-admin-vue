@@ -1,8 +1,17 @@
 import type { ManagerInfo } from "@/types/apiTypes/adminApiTypes";
 import type { ButtonItem } from "@/types/buttonItem";
-import { NButton, NSpace, NIcon, NAvatar, NFlex, NSwitch } from "naive-ui";
+import {
+  NButton,
+  NSpace,
+  NIcon,
+  NAvatar,
+  NFlex,
+  NSwitch,
+  NTag,
+} from "naive-ui";
 import { h, type Component, type VNodeChild } from "vue";
 import { textRender } from "./common";
+import { COMMON_STATUS } from "@/constants/statusEnum";
 
 export const renderIcon = (icon: Component) => {
   return h(NIcon, null, { default: () => h(icon) });
@@ -75,4 +84,15 @@ export const renderManagerStatus = (
 
 export const renderFlex = (children: VNodeChild[]) => {
   return h(NFlex, { align: "center" }, { default: () => children });
+};
+
+export const renderStatus = (status: number) => {
+  const tagType = status === COMMON_STATUS.VALID ? "success" : "default";
+  const text = status === COMMON_STATUS.VALID ? "有效" : "禁用";
+
+  return h(
+    NTag,
+    { type: tagType, round: true, size: "small" },
+    { default: () => text },
+  );
 };

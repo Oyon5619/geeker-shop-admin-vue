@@ -20,13 +20,10 @@ const METHOD_OPTIONS = [
   { label: "DELETE", value: "DELETE" },
 ];
 
-const ICON_OPTIONS = [
-  { label: "menu", value: "menu" },
-  { label: "user-filled", value: "user-filled" },
-  { label: "notification", value: "notification" },
-  { label: "data-analysis", value: "data-analysis" },
-  { label: "user", value: "user" },
-];
+const ICON_OPTIONS = Object.keys(ICON_MAP).map((item) => ({
+  label: item,
+  value: item,
+}));
 
 const renderLabel = ({ label = "", value = "" }: SelectBaseOption) => {
   const icon = renderIcon(ICON_MAP[value]);
@@ -59,6 +56,7 @@ const onOpenAdd = () => {
 
 const onRefresh = () => {
   getAccessList();
+  accessFormDrawerRef.value?.onClose();
 };
 
 const onSubmit = () => {
@@ -73,7 +71,7 @@ const onSubmit = () => {
     }
 
     showToast("success", `${prefixText.value}成功!`);
-    getAccessList();
+    onRefresh();
   });
 };
 
@@ -96,7 +94,7 @@ onMounted(() => {
       <CommonActions @add="onOpenAdd" @refresh="onRefresh" />
       <n-tree
         block-line
-        :data="treeData"
+        :data="treeData(true)"
         :default-expanded-keys="defaultExpandedKeys"
       />
     </n-space>

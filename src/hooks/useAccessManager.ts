@@ -77,18 +77,22 @@ const renderSuffix = (item: AccessInfo, onBtnClick: BtnClickFn) => {
 const mapToTreeData = (
   onBtnClick: BtnClickFn,
   accessList?: AccessInfo[],
+  isNeedSuffix?: boolean,
 ): TreeOptions | undefined => {
   return accessList?.map((item) => {
     const { id, name, child } = item;
     const children = child?.length
-      ? mapToTreeData(onBtnClick, child)
+      ? mapToTreeData(onBtnClick, child, isNeedSuffix)
+      : undefined;
+    const suffix = isNeedSuffix
+      ? () => renderSuffix(item, onBtnClick)
       : undefined;
 
     return {
-      key: id.toString() ?? "",
+      key: id,
       label: name,
       prefix: () => renderPrefix(item),
-      suffix: () => renderSuffix(item, onBtnClick),
+      suffix,
       children,
     };
   });
@@ -141,7 +145,7 @@ export const useAccessManager = () => {
   const isMenu = computed(() => Boolean(accessFormValue.menu));
 
   const {
-    run: getAccessList,
+    runAsync: getAccessList,
     data: accessListData,
     loading,
   } = useRequest(getAccessListAsync, { manual: true });
@@ -231,8 +235,9 @@ export const useAccessManager = () => {
     onRemove(item);
   };
 
-  const treeData = computed(() =>
-    mapToTreeData(onBtnClick, accessListData.value?.list),
+  const treeData = computed(
+    () => (isNeedSuffix?: boolean) =>
+      mapToTreeData(onBtnClick, accessListData.value?.list, isNeedSuffix),
   );
   const defaultExpandedKeys = computed(() =>
     getDefaultExpandedKeys(accessListData.value?.list),

@@ -2,7 +2,7 @@
 import CommonActions from "@/components/commonActions.vue";
 import FormDrawer from "@/components/formDrawer.vue";
 import { PAGE_SIZE_10 } from "@/constants/pagination";
-import { MANAGER_STATUS } from "@/constants/statusEnum";
+import { COMMON_STATUS } from "@/constants/statusEnum";
 import { useAdminListManager } from "@/hooks/useAdminListManager";
 import store from "@/store";
 import type { ManagerInfo } from "@/types/apiTypes/adminApiTypes";
@@ -133,7 +133,7 @@ const onSubmit = () => {
 };
 
 const onCancel = () => {
-  setInfoFormValue({ status: MANAGER_STATUS.VALID });
+  setInfoFormValue({ status: COMMON_STATUS.VALID });
 };
 
 const onOpenImgSelectorModal = () => {
@@ -256,8 +256,8 @@ onMounted(() => {
         <n-form-item label="状态" path="status">
           <n-switch
             v-model:value="infoFormValue.status"
-            :checked-value="MANAGER_STATUS.VALID"
-            :unchecked-value="MANAGER_STATUS.INVALID"
+            :checked-value="COMMON_STATUS.VALID"
+            :unchecked-value="COMMON_STATUS.INVALID"
           />
         </n-form-item>
         <n-form-item label="头像" path="avatar">
