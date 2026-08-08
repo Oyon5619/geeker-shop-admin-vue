@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import CommonActions from "@/components/commonActions.vue";
 import FormDrawer from "@/components/formDrawer.vue";
+import FullPage from "@/components/fullPage.vue";
 import { PAGE_SIZE_10 } from "@/constants/pagination";
 import { useNoticeManager } from "@/hooks/useNoticeManager";
 import type { NoticeInfo } from "@/types/apiTypes/noticeApiTypes";
@@ -116,7 +117,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="h-full bg-white p-4 overflow-y-auto">
+  <FullPage>
     <n-space vertical size="large">
       <CommonActions
         refresh-text="刷新本页数据"
@@ -171,5 +172,5 @@ onMounted(() => {
         </n-form-item>
       </n-form>
     </FormDrawer>
-  </div>
+  </FullPage>
 </template>

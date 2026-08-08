@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import CommonActions from "@/components/commonActions.vue";
 import FormDrawer from "@/components/formDrawer.vue";
+import FullPage from "@/components/fullPage.vue";
 import { PAGE_SIZE_10 } from "@/constants/pagination";
 import { COMMON_STATUS } from "@/constants/statusEnum";
 import { useAdminListManager } from "@/hooks/useAdminListManager";
@@ -172,7 +173,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="bg-white h-full p-4 overflow-y-auto">
+  <FullPage>
     <n-space vertical>
       <n-form
         :model="queryFormValue"
@@ -278,5 +279,5 @@ onMounted(() => {
       title="选择头像"
       @confirm="onSelectAvatarConfirm"
     />
-  </div>
+  </FullPage>
 </template>

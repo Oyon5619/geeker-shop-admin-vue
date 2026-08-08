@@ -21,3 +21,9 @@ export const DEFAULT_SEPARATOR = "";
 
 /** 空格 */
 export const SPACE = " ";
+
+/** 逗号 */
+export const COMMA = ",";
+
+/** 密码最小长度 */
+export const PWD_MIN_LENGTH = 5;

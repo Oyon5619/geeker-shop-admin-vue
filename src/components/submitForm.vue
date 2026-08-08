@@ -6,10 +6,14 @@ import type {
 } from "@/types/submitFormConfigColumn";
 import {
   NButton,
+  NCheckbox,
+  NCheckboxGroup,
   NFlex,
   NForm,
   NFormItem,
   NInput,
+  NInputGroup,
+  NInputGroupLabel,
   NInputNumber,
   NRadio,
   NRadioGroup,
@@ -21,9 +25,16 @@ import {
   type FormInst,
   type FormRules,
 } from "naive-ui";
-import { defineComponent, h, reactive, ref, type VNode } from "vue";
+import {
+  defineComponent,
+  h,
+  reactive,
+  ref,
+  type Component,
+  type VNode,
+} from "vue";
 
-interface RadioItem {
+interface OptionItem {
   label: string;
   value: string | number;
 }
@@ -51,18 +62,23 @@ const renderAvatarUpload = (compProps?: Record<string, unknown>) => {
 
   return h(NFlex, { vertical: true }, { default: () => children });
 };
-const renderRadioGroup = (compProps?: Record<string, unknown>) => {
-  const radioOptions = compProps?.options as RadioItem[];
 
-  const children = radioOptions?.map(({ label, value }) => {
-    return h(NRadio, { label, value }, { default: () => label });
+const renderOptionGroup = (
+  FatherComp: Component,
+  childComp: Component,
+  compProps?: Record<string, unknown>,
+) => {
+  const options = compProps?.options as OptionItem[];
+
+  const children = options?.map(({ label, value }) => {
+    return h(childComp, { label, value }, { default: () => label });
   });
-  return h(NRadioGroup, null, { default: () => children });
+  return h(FatherComp, null, { default: () => children });
 };
 
 const FORM_COMP_MAP: Record<
   FormComp,
-  (compProps?: Record<string, unknown>) => VNode
+  ((compProps?: Record<string, unknown>) => VNode) | undefined
 > = {
   input: (compProps) => h(NInput, compProps),
   select: (compProps) => h(NSelect, compProps),
@@ -70,7 +86,10 @@ const FORM_COMP_MAP: Record<
   switch: (compProps) => h(NSwitch, compProps),
   tree: (compProps) => h(NTree, compProps),
   avatarUpload: renderAvatarUpload,
-  radioGroup: renderRadioGroup,
+  radioGroup: (compProps) => renderOptionGroup(NRadioGroup, NRadio, compProps),
+  checkboxGroup: (compProps) =>
+    renderOptionGroup(NCheckboxGroup, NCheckbox, compProps),
+  inputNumGroup: undefined, // 已在template里实现
 };
 
 const formRef = ref<FormInst>();
@@ -86,6 +105,16 @@ const {
 } = defineProps<SubmitFormProps>();
 const innerformModel = reactive(formModel);
 
+const FormItemInner = defineComponent(
+  (props) => {
+    const { comp, compProps } = props;
+    const resultComp = FORM_COMP_MAP[comp as FormComp]?.(compProps);
+
+    return () => resultComp;
+  },
+  { props: ["comp", "compProps"] },
+);
+
 const onSubmit: SubmitFormRef["onSubmit"] = (callback) => {
   formRef.value?.validate((err) => {
     if (err) {
@@ -95,18 +124,6 @@ const onSubmit: SubmitFormRef["onSubmit"] = (callback) => {
     callback?.();
   });
 };
-
-const FormItemInner = defineComponent(
-  (props) => {
-    const { comp, compProps } = props;
-    const renderComp = FORM_COMP_MAP[comp as FormComp]?.(compProps);
-
-    return () => renderComp;
-  },
-  {
-    props: ["comp", "compProps"],
-  },
-);
 
 defineExpose<SubmitFormRef>({ onSubmit });
 </script>
@@ -127,11 +144,21 @@ defineExpose<SubmitFormRef>({ onSubmit });
       :label="item.label"
       :path="item.column"
     >
+      <n-input-group v-if="item.comp === 'inputNumGroup'">
+        <FormItemInner
+          comp="inputNumber"
+          :compProps="item.compProps"
+          v-model:value="innerformModel[item.column]"
+        />
+        <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
+      </n-input-group>
       <FormItemInner
+        v-else
         :comp="item.comp"
         :compProps="item.compProps"
         v-model:value="innerformModel[item.column]"
       />
     </n-form-item>
+    <slot></slot>
   </n-form>
 </template>
