@@ -2,10 +2,11 @@
 import { RefreshSharp } from "@vicons/ionicons5";
 import { useDebounceFn } from "vue-hooks-plus";
 
-const { addText = "新增", refreshText = "刷新数据" } = defineProps([
-  "addText",
-  "refreshText",
-]);
+const {
+  addText = "新增",
+  refreshText = "刷新数据",
+  showAdd = true,
+} = defineProps(["addText", "refreshText", "showAdd"]);
 const emit = defineEmits(["add", "refresh"]);
 
 const onAdd = () => {
@@ -22,7 +23,7 @@ const { run: onRefresh } = useDebounceFn(
 
 <template>
   <n-flex>
-    <n-button type="primary" size="small" @click="onAdd">{{
+    <n-button type="primary" size="small" v-if="showAdd" @click="onAdd">{{
       addText
     }}</n-button>
     <n-button size="small" @click="onRefresh">

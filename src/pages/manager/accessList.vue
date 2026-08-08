@@ -167,5 +167,3 @@ onMounted(() => {
     </FormDrawer>
   </n-spin>
 </template>
-
-<style scoped></style>

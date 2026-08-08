@@ -5,11 +5,14 @@ export type FormComp =
   | "avatarUpload"
   | "switch"
   | "radioGroup"
-  | "tree";
+  | "tree"
+  | "checkboxGroup"
+  | "inputNumGroup";
 
 export interface FormConfigColumn {
   label: string;
   column: string;
   comp: FormComp;
   compProps?: Record<string, unknown>;
+  suffixLabel?: string;
 }
