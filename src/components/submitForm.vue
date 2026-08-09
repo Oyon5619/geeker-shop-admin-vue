@@ -98,9 +98,9 @@ const {
   formConfigs,
   formModel,
   formRules,
-  inline = true,
-  labelPlacement,
-  labelWidth,
+  inline = false,
+  labelPlacement = "left",
+  labelWidth = "auto",
   disabled,
 } = defineProps<SubmitFormProps>();
 const innerformModel = reactive(formModel);
@@ -144,20 +144,28 @@ defineExpose<SubmitFormRef>({ onSubmit });
       :label="item.label"
       :path="item.column"
     >
-      <n-input-group v-if="item.comp === 'inputNumGroup'">
+      <div class="w-full">
+        <n-input-group v-if="item.comp === 'inputNumGroup'">
+          <FormItemInner
+            comp="inputNumber"
+            :compProps="item.compProps"
+            v-model:value="innerformModel[item.column]"
+          />
+          <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
+        </n-input-group>
         <FormItemInner
-          comp="inputNumber"
+          v-else
+          :comp="item.comp"
           :compProps="item.compProps"
           v-model:value="innerformModel[item.column]"
         />
-        <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
-      </n-input-group>
-      <FormItemInner
-        v-else
-        :comp="item.comp"
-        :compProps="item.compProps"
-        v-model:value="innerformModel[item.column]"
-      />
+        <div
+          class="text-[0.625rem] mt-1 text-gray-500"
+          v-if="Boolean(item.tips)"
+        >
+          {{ item.tips }}
+        </div>
+      </div>
     </n-form-item>
     <slot></slot>
   </n-form>
