@@ -15,4 +15,5 @@ export interface FormConfigColumn {
   comp: FormComp;
   compProps?: Record<string, unknown>;
   suffixLabel?: string;
+  tips?: string;
 }

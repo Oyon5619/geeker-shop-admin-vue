@@ -8,7 +8,6 @@ import {
 } from "@/api/sysconfigApi";
 import { COMMA } from "@/constants/common";
 import { PaymentEnum } from "@/constants/paymentEnum";
-import type { FormConfigColumn } from "@/types/submitFormConfigColumn";
 import { compact } from "lodash";
 import { computed, reactive, ref } from "vue";
 import { useRequest } from "vue-hooks-plus";
@@ -32,6 +31,8 @@ type ShoppingSettingInfo = Pick<
   "close_order_minute" | "auto_received_day" | "after_sale_day"
 >;
 
+type StreamSettingInfo = Pick<ModifySysBaseSettingsApiReq, "ship">;
+
 const SYS_SETTING_MODIFY_SUVVESS_CODE = 0;
 
 const getSysBaseSettingsAsync = async () => {
@@ -53,41 +54,13 @@ export const useBaseSettingManager = () => {
   const shoppingSettingFormModel = reactive<ShoppingSettingInfo>({});
   const alipaySettingFormModel = reactive<Partial<SysAlipaySettingInfo>>({});
   const wxpaySettingFormModel = reactive<Partial<SysWxpaySettingInfo>>({});
+  const streamSettingFormModel = reactive<StreamSettingInfo>({});
 
   const paymentFormModel = computed(() =>
     paymentKey.value === PaymentEnum.ALIPAY
       ? alipaySettingFormModel
       : wxpaySettingFormModel,
   );
-
-  const paymentFormConfigs = computed<FormConfigColumn[]>(() => {
-    if (paymentKey.value === PaymentEnum.ALIPAY) {
-      return [
-        { column: "app_id", label: "app_id", comp: "input" },
-        {
-          column: "ali_public_key",
-          label: "ali_public_key",
-          comp: "input",
-          compProps: { type: "textarea" },
-        },
-        {
-          column: "private_key",
-          label: "private_key",
-          comp: "input",
-          compProps: { type: "textarea" },
-        },
-      ];
-    }
-
-    return [
-      { column: "app_id", label: "公众号 APP ID", comp: "input" },
-      { column: "miniapp_id", label: "小程序 APP ID", comp: "input" },
-      { column: "secret", label: "小程序 secret", comp: "input" },
-      { column: "appid", label: "appid", comp: "input" },
-      { column: "mch_id", label: "商户号", comp: "input" },
-      { column: "key", label: "API密钥", comp: "input" },
-    ];
-  });
 
   const {
     runAsync: getSysBaseSettings,
@@ -129,6 +102,13 @@ export const useBaseSettingManager = () => {
         }
 
         return await modifyBaseSettingsAsync({ wxpay: wxpaySettingFormModel });
+      },
+      { manual: true },
+    );
+  const { runAsync: saveStreamSetting, loading: isSavingStreamSetting } =
+    useRequest(
+      async () => {
+        return await modifyBaseSettingsAsync(streamSettingFormModel);
       },
       { manual: true },
     );
@@ -215,6 +195,13 @@ export const useBaseSettingManager = () => {
     wxpaySettingFormModel.cert_key = cert_key;
   };
 
+  const initStreamSettingInfo = async () => {
+    const data = await getSysBaseSettings();
+    const { ship } = data ?? {};
+
+    streamSettingFormModel.ship = ship;
+  };
+
   return {
     getSysBaseSettings,
     saveBaseSettingData,
@@ -223,6 +210,8 @@ export const useBaseSettingManager = () => {
     saveShoppingSettingData,
     savePaymentSetting,
     initPaymentSettingInfo,
+    initStreamSettingInfo,
+    saveStreamSetting,
     regAndAccessFormModel,
     uploadSettingFormModel,
     apiSafeFormModel,
@@ -234,6 +223,7 @@ export const useBaseSettingManager = () => {
     isSavingPaymentSetting,
     paymentKey,
     paymentFormModel,
-    paymentFormConfigs,
+    streamSettingFormModel,
+    isSavingStreamSetting,
   };
 };

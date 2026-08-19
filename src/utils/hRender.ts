@@ -34,7 +34,11 @@ export const renderButtonItems = <T = unknown>(
   return h(NSpace, null, { default: renderInner });
 };
 
-export const renderManagerThumbnail = (row: ManagerInfo) => {
+export const renderThumbnail = (row: {
+  username: string;
+  avatar: string;
+  id: number;
+}) => {
   const { avatar, username, id } = row;
 
   const renderRightContent = () => {
@@ -95,4 +99,8 @@ export const renderStatus = (status: number) => {
     { type: tagType, round: true, size: "small" },
     { default: () => text },
   );
+};
+
+export const renderText = (textValue?: string) => {
+  return h("div", null, { default: () => textRender(textValue) });
 };

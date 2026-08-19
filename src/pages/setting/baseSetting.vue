@@ -2,13 +2,12 @@
 import CommonActions from "@/components/commonActions.vue";
 import FullPage from "@/components/fullPage.vue";
 import SubmitForm from "@/components/submitForm.vue";
+import { INPUT_COMP_PROPS } from "@/constants/common";
 import { PwdComplexityEnum } from "@/constants/pwdComplexityEnum";
 import { useBaseSettingManager } from "@/hooks/useBaseSettingManager";
 import type { FormConfigColumn } from "@/types/submitFormConfigColumn";
 import { showToast } from "@/utils/popup";
 import { onMounted } from "vue";
-
-const INPUT_STYLE = "width: 215px;";
 
 const {
   regAndAccessFormModel,
@@ -36,12 +35,12 @@ const REG_AND_ACCESS_FORM_CONFIGS: FormConfigColumn[] = [
     label: "注册类型",
     comp: "select",
     compProps: {
+      ...INPUT_COMP_PROPS,
       options: [
         { label: "普通注册", value: "username" },
         { label: "手机注册", value: "phone" },
       ],
       allowClear: true,
-      style: INPUT_STYLE,
     },
   },
   {
@@ -81,26 +80,26 @@ const UPLOAD_SETTING_FORM_CONFIGS: FormConfigColumn[] = [
     column: "Bucket",
     label: "Bucket",
     comp: "input",
-    compProps: { style: INPUT_STYLE },
+    compProps: INPUT_COMP_PROPS,
   },
   {
     column: "ACCESS_KEY",
     label: "ACCESS_KEY",
     comp: "input",
-    compProps: { style: INPUT_STYLE },
+    compProps: INPUT_COMP_PROPS,
   },
   {
     column: "SECRET_KEY",
     label: "SECRET_KEY",
     comp: "input",
-    compProps: { style: INPUT_STYLE },
+    compProps: INPUT_COMP_PROPS,
   },
   {
     column: "http",
     label: "空间域名",
     comp: "input",
     compProps: {
-      style: INPUT_STYLE,
+      ...INPUT_COMP_PROPS,
       placeholder: "请补全 http:// 或 https://",
     },
   },
@@ -117,12 +116,14 @@ const API_SAFE_FORM_CONFIGS: FormConfigColumn[] = [
         { label: "开启", value: 1 },
       ],
     },
+    tips: "api安全功能开启之后调用前端api需要传输签名串",
   },
   {
     column: "api_secret",
     label: "密钥",
     comp: "input",
-    compProps: { style: INPUT_STYLE },
+    compProps: INPUT_COMP_PROPS,
+    tips: "秘钥设置关系系统中api调用传输签名串的编码规则，以及会员token解析，请慎重设置，注意设置之后对应会员要求重新登录获取token",
   },
 ];
 
@@ -177,17 +178,6 @@ onMounted(() => {
           :name="item.key"
           :tab="item.tabName"
         >
-          <n-alert
-            type="info"
-            title="注意事项"
-            v-show="item.key === 'apiSafe'"
-            class="w-210"
-          >
-            <p>api安全功能开启之后调用前端api需要传输签名串</p>
-            <p>
-              秘钥设置关系系统中api调用传输签名串的编码规则，以及会员token解析，请慎重设置，注意设置之后对应会员要求重新登录获取token
-            </p>
-          </n-alert>
           <SubmitForm
             labelPlacement="left"
             labelWidth="auto"

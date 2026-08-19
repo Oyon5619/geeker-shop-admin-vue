@@ -27,3 +27,6 @@ export const COMMA = ",";
 
 /** 密码最小长度 */
 export const PWD_MIN_LENGTH = 5;
+
+/** 长为215px的input框 */
+export const INPUT_COMP_PROPS = { style: "width: 215px;" };

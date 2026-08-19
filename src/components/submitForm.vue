@@ -24,6 +24,7 @@ import {
   type ButtonProps,
   type FormInst,
   type FormRules,
+  type UploadFileInfo,
 } from "naive-ui";
 import {
   defineComponent,
@@ -49,20 +50,6 @@ export interface SubmitFormProps {
   disabled?: boolean;
 }
 
-const renderAvatarUpload = (compProps?: Record<string, unknown>) => {
-  const { onClick: onClickFn, ...restProps } = compProps ?? {};
-  const children = [
-    h(
-      NButton,
-      { onClick: onClickFn as ButtonProps["onClick"] },
-      { default: () => "点击选择" },
-    ),
-    h(NUpload, { ...restProps }),
-  ];
-
-  return h(NFlex, { vertical: true }, { default: () => children });
-};
-
 const renderOptionGroup = (
   FatherComp: Component,
   childComp: Component,
@@ -85,10 +72,10 @@ const FORM_COMP_MAP: Record<
   inputNumber: (compProps) => h(NInputNumber, compProps),
   switch: (compProps) => h(NSwitch, compProps),
   tree: (compProps) => h(NTree, compProps),
-  avatarUpload: renderAvatarUpload,
   radioGroup: (compProps) => renderOptionGroup(NRadioGroup, NRadio, compProps),
   checkboxGroup: (compProps) =>
     renderOptionGroup(NCheckboxGroup, NCheckbox, compProps),
+  avatarUpload: undefined, //已在template里实现
   inputNumGroup: undefined, // 已在template里实现
 };
 
@@ -98,9 +85,9 @@ const {
   formConfigs,
   formModel,
   formRules,
-  inline = true,
-  labelPlacement,
-  labelWidth,
+  inline = false,
+  labelPlacement = "left",
+  labelWidth = "auto",
   disabled,
 } = defineProps<SubmitFormProps>();
 const innerformModel = reactive(formModel);
@@ -144,20 +131,39 @@ defineExpose<SubmitFormRef>({ onSubmit });
       :label="item.label"
       :path="item.column"
     >
-      <n-input-group v-if="item.comp === 'inputNumGroup'">
+      <div class="w-full">
+        <n-input-group v-if="item.comp === 'inputNumGroup'">
+          <FormItemInner
+            comp="inputNumber"
+            :compProps="item.compProps"
+            v-model:value="innerformModel[item.column]"
+          />
+          <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
+        </n-input-group>
+        <n-flex v-else-if="item.comp === 'avatarUpload'" vertical class="w-fit">
+          <n-button @click="item.compProps?.onClick as ButtonProps['onClick']">
+            点击选择
+          </n-button>
+          <n-upload
+            list-type="image-card"
+            :file-list="(item.compProps?.fileList ?? []) as UploadFileInfo[]"
+            :max="1"
+            disabled
+          />
+        </n-flex>
         <FormItemInner
-          comp="inputNumber"
+          v-else
+          :comp="item.comp"
           :compProps="item.compProps"
           v-model:value="innerformModel[item.column]"
         />
-        <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
-      </n-input-group>
-      <FormItemInner
-        v-else
-        :comp="item.comp"
-        :compProps="item.compProps"
-        v-model:value="innerformModel[item.column]"
-      />
+        <div
+          class="text-[0.625rem] mt-1 text-gray-500"
+          v-if="Boolean(item.tips)"
+        >
+          {{ item.tips }}
+        </div>
+      </div>
     </n-form-item>
     <slot></slot>
   </n-form>

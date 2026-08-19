@@ -58,8 +58,6 @@ defineExpose({ onOpen, onClose });
         <div class="flex-1 overflow-y-auto">
           <SubmitForm
             ref="submitFormRef"
-            labelPlacement="left"
-            labelWidth="auto"
             :formConfigs="formConfigs"
             :formModel="formModel"
             :formRules="formRules"
