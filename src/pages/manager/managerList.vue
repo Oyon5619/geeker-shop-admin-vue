@@ -12,7 +12,7 @@ import type { ButtonItem } from "@/types/buttonItem";
 import type { ImgSelectorModalRef } from "@/types/compRef/imgSelectorModalRef";
 import {
   renderButtonItems,
-  renderManagerThumbnail,
+  renderThumbnail,
   renderManagerStatus,
 } from "@/utils/hRender";
 import { showToast, useDialog } from "@/utils/popup";
@@ -146,7 +146,7 @@ const onSelectAvatarConfirm = ({ url }: ImgInfo) => {
 };
 
 const COLUMNS: DataTableColumns<ManagerInfo> = [
-  { key: "thumbnail", title: "管理员", render: renderManagerThumbnail },
+  { key: "thumbnail", title: "管理员", render: renderThumbnail },
   { key: "roleName", title: "所属角色", render: ({ role }) => role.name },
   { key: "update_time", title: "更新时间" },
   {

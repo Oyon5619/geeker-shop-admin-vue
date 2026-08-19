@@ -14,6 +14,7 @@ import type { FormDrawerRef } from "@/types/compRef/formDrawerRef";
 import { renderButtonItems } from "@/utils/hRender";
 import { ICON_MAP } from "@/utils/iconMap";
 import { showToast, useDialog } from "@/utils/popup";
+import { isNumber } from "lodash";
 import {
   NFlex,
   NIcon,
@@ -109,13 +110,13 @@ const mapToCascaderOptions = (
   });
 };
 
-const getDefaultExpandedKeys = (accessList?: AccessInfo[]): string[] => {
-  return accessList?.map((item) => item.id.toString()) ?? [];
+const getDefaultExpandedKeys = (accessList?: AccessInfo[]): number[] => {
+  return accessList?.map((item) => item.id) ?? [];
 };
 
 const addAccessApiAsync = async (req: AddAccessApiReq) => {
   const { data } = await addAccessApi(req);
-  return Boolean(data?.id);
+  return isNumber(data?.id);
 };
 
 const modifyAccessAsync = async (req: ModifyAccessApiReq) => {

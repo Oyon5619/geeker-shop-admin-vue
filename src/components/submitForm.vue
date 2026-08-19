@@ -24,6 +24,7 @@ import {
   type ButtonProps,
   type FormInst,
   type FormRules,
+  type UploadFileInfo,
 } from "naive-ui";
 import {
   defineComponent,
@@ -49,20 +50,6 @@ export interface SubmitFormProps {
   disabled?: boolean;
 }
 
-const renderAvatarUpload = (compProps?: Record<string, unknown>) => {
-  const { onClick: onClickFn, ...restProps } = compProps ?? {};
-  const children = [
-    h(
-      NButton,
-      { onClick: onClickFn as ButtonProps["onClick"] },
-      { default: () => "点击选择" },
-    ),
-    h(NUpload, { ...restProps }),
-  ];
-
-  return h(NFlex, { vertical: true }, { default: () => children });
-};
-
 const renderOptionGroup = (
   FatherComp: Component,
   childComp: Component,
@@ -85,10 +72,10 @@ const FORM_COMP_MAP: Record<
   inputNumber: (compProps) => h(NInputNumber, compProps),
   switch: (compProps) => h(NSwitch, compProps),
   tree: (compProps) => h(NTree, compProps),
-  avatarUpload: renderAvatarUpload,
   radioGroup: (compProps) => renderOptionGroup(NRadioGroup, NRadio, compProps),
   checkboxGroup: (compProps) =>
     renderOptionGroup(NCheckboxGroup, NCheckbox, compProps),
+  avatarUpload: undefined, //已在template里实现
   inputNumGroup: undefined, // 已在template里实现
 };
 
@@ -153,6 +140,17 @@ defineExpose<SubmitFormRef>({ onSubmit });
           />
           <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
         </n-input-group>
+        <n-flex v-else-if="item.comp === 'avatarUpload'" vertical class="w-fit">
+          <n-button @click="item.compProps?.onClick as ButtonProps['onClick']">
+            点击选择
+          </n-button>
+          <n-upload
+            list-type="image-card"
+            :file-list="(item.compProps?.fileList ?? []) as UploadFileInfo[]"
+            :max="1"
+            disabled
+          />
+        </n-flex>
         <FormItemInner
           v-else
           :comp="item.comp"

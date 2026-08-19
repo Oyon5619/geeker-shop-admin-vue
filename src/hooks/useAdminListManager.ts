@@ -13,6 +13,7 @@ import type {
   ModifyManagerApiReq,
 } from "@/types/apiTypes/adminApiTypes";
 import type { FormDrawerRef } from "@/types/compRef/formDrawerRef";
+import { isNumber } from "lodash";
 import type { FormInst, FormRules, UploadFileInfo } from "naive-ui";
 import { computed, reactive, ref } from "vue";
 import { useRequest } from "vue-hooks-plus";
@@ -59,7 +60,7 @@ const modifyManagerStatusAsync = async (req: ModifyManagerApiReq) => {
 
 const addManagerAsync = async (req: AddManagerApiReq) => {
   const { data } = await addManagerApi(req);
-  return Boolean(data?.id);
+  return isNumber(data?.id);
 };
 
 const modifyManagerAsync = async (req: ModifyManagerApiReq) => {
