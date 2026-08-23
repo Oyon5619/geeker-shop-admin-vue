@@ -105,7 +105,7 @@ const FormItemInner = defineComponent(
 const onSubmit: SubmitFormRef["onSubmit"] = (callback) => {
   formRef.value?.validate((err) => {
     if (err) {
-      console.error(err);
+      return console.error(err);
     }
 
     callback?.();
@@ -133,12 +133,17 @@ defineExpose<SubmitFormRef>({ onSubmit });
     >
       <div class="w-full">
         <n-input-group v-if="item.comp === 'inputNumGroup'">
+          <n-input-group-label v-if="!!item.prefixLabel">
+            {{ item.prefixLabel }}
+          </n-input-group-label>
           <FormItemInner
             comp="inputNumber"
             :compProps="item.compProps"
             v-model:value="innerformModel[item.column]"
           />
-          <n-input-group-label>{{ item.suffixLabel }}</n-input-group-label>
+          <n-input-group-label v-if="!!item.suffixLabel">
+            {{ item.suffixLabel }}
+          </n-input-group-label>
         </n-input-group>
         <n-flex v-else-if="item.comp === 'avatarUpload'" vertical class="w-fit">
           <n-button @click="item.compProps?.onClick as ButtonProps['onClick']">

@@ -14,7 +14,7 @@ import type { FormDrawerRef } from "@/types/compRef/formDrawerRef";
 import { renderButtonItems } from "@/utils/hRender";
 import { ICON_MAP } from "@/utils/iconMap";
 import { showToast, useDialog } from "@/utils/popup";
-import { isNumber } from "lodash";
+import { isEmpty } from "lodash";
 import {
   NFlex,
   NIcon,
@@ -116,7 +116,7 @@ const getDefaultExpandedKeys = (accessList?: AccessInfo[]): number[] => {
 
 const addAccessApiAsync = async (req: AddAccessApiReq) => {
   const { data } = await addAccessApi(req);
-  return isNumber(data?.id);
+  return !isEmpty(data?.id);
 };
 
 const modifyAccessAsync = async (req: ModifyAccessApiReq) => {

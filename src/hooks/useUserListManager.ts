@@ -10,9 +10,8 @@ import type {
   AddUserApiReq,
   GetUserListApiReq,
   ModifyUserApiReq,
-  UserInfo,
 } from "@/types/apiTypes/userApiTypes";
-import { isNumber } from "lodash";
+import { isEmpty } from "lodash";
 import type { UploadFileInfo } from "naive-ui/es/upload";
 import { computed, reactive, ref } from "vue";
 import { useRequest } from "vue-hooks-plus";
@@ -66,7 +65,7 @@ const modifyUserAsync = async (req: ModifyUserApiReq) => {
 
 const addUserAsync = async (req: AddUserApiReq) => {
   const { data } = await addUserApi(req);
-  return isNumber(data?.id);
+  return !isEmpty(data?.id);
 };
 
 export const useUserListManager = () => {

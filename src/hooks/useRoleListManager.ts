@@ -12,7 +12,7 @@ import type {
   ModifyRoleApiReq,
   SetRoleRulesApiReq,
 } from "@/types/apiTypes/roleApiTypes";
-import { isNumber } from "lodash";
+import { isEmpty } from "lodash";
 import { computed, reactive, ref } from "vue";
 import { useRequest } from "vue-hooks-plus";
 
@@ -34,7 +34,7 @@ const getRoleListAsync = async (page: number = DEFAULT_PAGE) => {
 
 const addRoleAsync = async (req: AddRoleApiReq) => {
   const { data } = await addRoleApi(req);
-  return isNumber(data?.id);
+  return !isEmpty(data?.id);
 };
 
 const modifyRoleAsync = async (req: ModifyRoleApiReq) => {
